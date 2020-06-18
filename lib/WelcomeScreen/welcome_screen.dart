@@ -361,34 +361,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 alignment: Alignment.center,
                               ),
                             ),
-//                            Positioned(
-//                              child: Align(
-//                                child: Container(
-//                                  padding: EdgeInsets.only(top: 40, left: 28),
-//                                  width: 130,
-//                                  child: Text(
-//                                    "STER",
-//                                    style: TextStyle(
-//                                      fontSize: 40,
-//                                      fontWeight: FontWeight.bold,
-//                                      color: Colors.white,
-//                                    ),
-//                                  ),
-//                                ),
-//                                alignment: Alignment.center,
-//                              ),
-//                            ),
                           ],
                         ),
                       ),
-//                      Padding(
-//                        padding: EdgeInsets.only(
-//                          bottom: 20,
-//                          top: 60,
-//                        ),
-//                        child: _input(Icon(Icons.account_circle),
-//                            "DISPLAY NAME", _nameController, false),
-//                      ),
+
                       Padding(
                         padding: EdgeInsets.only(
                           top: 60,
