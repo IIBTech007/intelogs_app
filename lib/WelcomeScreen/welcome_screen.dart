@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'clipper.dart';
+import '../utils/clipper.dart';
 
-class Home extends StatefulWidget {
+class WelcomeScreen extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _WelcomeScreenState extends State<WelcomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
@@ -125,7 +125,28 @@ class _HomeState extends State<Home> {
     }
 
     //button widget
-    Widget _button(String text, Color splashColor, Color highlightColor,
+    Widget login_button(String text, Color splashColor, Color highlightColor,
+        Color fillColor, Color textColor, void function()) {
+      return RaisedButton(
+        highlightElevation: 0.0,
+        splashColor: splashColor,
+        highlightColor: highlightColor,
+        elevation: 0.0,
+        color: fillColor,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        child: Text(
+          text,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: textColor, fontSize: 20),
+        ),
+        onPressed: () {
+          function();
+        },
+      );
+    }
+
+    Widget signup_button(String text, Color splashColor, Color highlightColor,
         Color fillColor, Color textColor, void function()) {
       return RaisedButton(
         highlightElevation: 0.0,
@@ -255,7 +276,7 @@ class _HomeState extends State<Home> {
                               right: 20,
                               bottom: MediaQuery.of(context).viewInsets.bottom),
                           child: Container(
-                            child: _button("LOGIN", Colors.white, primary,
+                            child: login_button("LOGIN", Colors.white, primary,
                                 primary, Colors.white, _loginUser),
                             height: 50,
                             width: MediaQuery.of(context).size.width,
@@ -387,7 +408,7 @@ class _HomeState extends State<Home> {
                             right: 20,
                             bottom: MediaQuery.of(context).viewInsets.bottom),
                         child: Container(
-                          child: _button("REGISTER", Colors.white, primary,
+                          child: signup_button("REGISTER", Colors.white, primary,
                               primary, Colors.white, _registerUser),
                           height: 50,
                           width: MediaQuery.of(context).size.width,
@@ -419,7 +440,7 @@ class _HomeState extends State<Home> {
             logo(),
             Padding(
               child: Container(
-                child: _button("LOGIN", primary, Colors.white, Colors.white,
+                child: login_button("LOGIN", primary, Colors.white, Colors.white,
                     primary, _loginSheet),
                 height: 50,
               ),

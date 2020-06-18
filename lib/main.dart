@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'home.dart';
+import 'WelcomeScreen/welcome_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           primaryColor:  Colors.amber,
           fontFamily: "Montserrat",
           canvasColor: Colors.transparent),
-      home: Home(),
+      home: WelcomeScreen(),
     );
   }
 }
