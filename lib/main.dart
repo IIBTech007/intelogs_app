@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          hintColor: Colors.amber,
-          primaryColor:  Colors.amber,
+          hintColor: Colors.amber.shade400,
+          primaryColor:  Colors.amber.shade400,
           fontFamily: "Montserrat",
           canvasColor: Colors.transparent),
       home: WelcomeScreen(),
