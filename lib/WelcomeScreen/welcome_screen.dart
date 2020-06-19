@@ -1,5 +1,9 @@
+import 'dart:convert';
+
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intelogsapp/json_services/api_services.dart';
 import '../utils/clipper.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -196,12 +200,37 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       _email = _emailController.text;
       _personContact = _personContactController.text;
 
-      _companyNameController.clear();
-      _companyTypeController.clear();
-      _companyEmployeesController.clear();
-      _personNameController.clear();
-      _emailController.clear();
-      _personContactController.clear();
+//      _companyNameController.clear();
+//      _companyTypeController.clear();
+//      _companyEmployeesController.clear();
+//      _personNameController.clear();
+//      _emailController.clear();
+//      _personContactController.clear();
+      print(_companyNameController);
+      networks_helper.Sign_Up(_company_name,_company_type,_company_employees,_personName, "example@mail.com",_personContact).then((response) async{
+         var res = jsonDecode(response);
+        if(res['error']!=true){
+          print("success");
+          Flushbar(
+            duration: Duration(seconds: 4),
+            title: "Opps", //ignored since titleText != null
+            message: "error", //ignored since messageText != null
+            titleText: Text("SignUp", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,color: Colors.yellow[600], fontFamily:"ShadowsIntoLightTwo"),),
+            messageText: Text(" Congratulations!", style: TextStyle(fontSize: 16.0, color: Colors.green,fontFamily: "ShadowsIntoLightTwo"),),
+          )..show(context);
+
+        }else{
+          print(res['message']);
+          Flushbar(
+            duration: Duration(seconds: 4),
+            title: "Opps", //ignored since titleText != null
+            message: "Error", //ignored since messageText != null
+            titleText: Text("Signup", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,color: Colors.yellow[600], fontFamily:"ShadowsIntoLightTwo"),),
+            messageText: Text(res['message'], style: TextStyle(fontSize: 16.0, color: Colors.red,fontFamily: "ShadowsIntoLightTwo"),),
+          )..show(context);
+        }
+      });
+
     }
 
     void _loginSheet() {
