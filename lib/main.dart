@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intelogsapp/SignUpScreen.dart';
 import 'WelcomeScreen/welcome_screen.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           primaryColor:  Colors.amber.shade400,
           fontFamily: "Montserrat",
           canvasColor: Colors.transparent),
-      home: WelcomeScreen(),
+      home: SignupScreen(),
     );
   }
 }
