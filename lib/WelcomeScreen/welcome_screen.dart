@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../utils/clipper.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -11,7 +12,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
   TextEditingController _nameController = new TextEditingController();
+  TextEditingController _companyNameController = new TextEditingController();
+  TextEditingController _companyTypeController = new TextEditingController();
+  TextEditingController _companyEmployeesController = new TextEditingController();
+  TextEditingController _personNameController = new TextEditingController();
+  TextEditingController _personContactController = new TextEditingController();
+
   String _email;
+  String _company_name;
+  String _company_type;
+  String _company_employees;
+  String _personContact;
+  String _personName;
   String _password;
   String _displayName;
   bool _obsecure = false;
@@ -86,7 +98,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     }
 
     //input widget
-    Widget _input(Icon icon, String hint, TextEditingController controller,
+    Widget _input(FaIcon icon, String hint, TextEditingController controller,
         bool obsecure) {
       return Container(
         padding: EdgeInsets.only(left: 20, right: 20),
@@ -177,12 +189,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     }
 
     void _registerUser() {
+      _company_name = _companyNameController.text;
+      _company_type = _companyTypeController.text;
+      _company_employees = _companyEmployeesController.text;
+      _personName = _personNameController.text;
       _email = _emailController.text;
-      _password = _passwordController.text;
-      _displayName = _nameController.text;
+      _personContact = _personContactController.text;
+
+      _companyNameController.clear();
+      _companyTypeController.clear();
+      _companyEmployeesController.clear();
+      _personNameController.clear();
       _emailController.clear();
-      _passwordController.clear();
-      _nameController.clear();
+      _personContactController.clear();
     }
 
     void _loginSheet() {
@@ -259,12 +278,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 20, top: 60),
-                          child: _input(Icon(Icons.email), "EMAIL",
+                          child: _input(FaIcon(FontAwesomeIcons.dharmachakra,), "EMAIL",
                               _emailController, false),
                         ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 20),
-                          child: _input(Icon(Icons.lock), "PASSWORD",
+                          child: _input(FaIcon(FontAwesomeIcons.dharmachakra,), "PASSWORD",
                               _passwordController, true),
                         ),
                         SizedBox(
@@ -357,27 +376,49 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             Positioned(
                               child: Container(
                                // padding: EdgeInsets.only(bottom: 25, right: 40),
-                                child: Image.asset('assets/Intellogs.png',width: 340,height: 340,),
+                                child: Image.asset('assets/Intellogs.png',width: 200,height: 200,),
                                 alignment: Alignment.center,
                               ),
                             ),
                           ],
                         ),
                       ),
-
                       Padding(
                         padding: EdgeInsets.only(
-                          top: 60,
-                          bottom: 20,
+                          top: 20,
+                          bottom: 15,
                         ),
-                        child: _input(Icon(Icons.email), "EMAIL",
-                            _emailController, false),
+                        child: _input
+                          ( FaIcon(FontAwesomeIcons.warehouse),
+                            "COMPANY NAME",
+                            _emailController,
+                            false),
                       ),
-//                      Padding(
-//                        padding: EdgeInsets.only(bottom: 20),
-//                        child: _input(Icon(Icons.lock), "PASSWORD",
-//                            _passwordController, true),
-//                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 15),
+                        child: _input(FaIcon(FontAwesomeIcons.question), "COMPANY TYPE",
+                            _passwordController, true),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 15),
+                        child: _input(FaIcon(FontAwesomeIcons.user), "COMPANY EMPLOYEES",
+                            _passwordController, true),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 15),
+                        child: _input(FaIcon(FontAwesomeIcons.user), "PERSON NAME",
+                            _passwordController, true),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 15),
+                        child: _input(FaIcon(FontAwesomeIcons.envelope), "EMAIL",
+                            _passwordController, true),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 15),
+                        child: _input(FaIcon(FontAwesomeIcons.mobile), "PERSON CONTACT",
+                            _passwordController, true),
+                      ),
                       Padding(
                         padding: EdgeInsets.only(
                             left: 20,
