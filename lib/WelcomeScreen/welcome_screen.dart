@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../utils/clipper.dart';
 
@@ -26,6 +27,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   String _personName;
   String _password;
   String _displayName;
+  double _lowerValue;
+  double _upperValue;
   bool _obsecure = false;
 
   @override
@@ -131,7 +134,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: icon,
                 ),
                 padding: EdgeInsets.only(left: 30, right: 10, top: 10),
-              )),
+              )
+          ),
         ),
       );
     }
@@ -402,11 +406,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         child: _input(FaIcon(FontAwesomeIcons.question), "COMPANY TYPE",
                             _companyTypeController, true),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 15),
-                        child: _input(FaIcon(FontAwesomeIcons.user), "COMPANY EMPLOYEES",
-                            _companyEmployeesController, true),
-                      ),
+
                       Padding(
                         padding: EdgeInsets.only(bottom: 15),
                         child: _input(FaIcon(FontAwesomeIcons.idCard), "PERSON NAME",
@@ -422,8 +422,78 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         child: _input(FaIcon(FontAwesomeIcons.mobile), "PERSON CONTACT",
                             _personContactController, true),
                       ),
+//                    Padding(
+//                      padding: EdgeInsets.only(bottom: 15),
+//                      child:
+//                      FlutterSlider(
+//
+//                        decoration: BoxDecoration(
+//                          border: Border.all(color: Colors.amber.shade400),
+//                          borderRadius: BorderRadius.circular(30)
+//                        ),
+//                        values: [300],
+//                        max: 500,
+//                        min: 0,
+//                        onDragging: (handlerIndex, lowerValue, upperValue) {
+//                          _lowerValue = lowerValue;
+//                          _upperValue = upperValue;
+//                          setState(() {});
+//                        },
+//                      )
+//                    ),
+//                      border: OutlineInputBorder(
+//                        borderRadius: BorderRadius.circular(30),
+//                        borderSide: BorderSide(
+//                          color: Theme.of(context).primaryColor,
+//                          width: 3,
+//                        ),
+//                      ),
+                      Container(
+                        width: 370,
+                        //width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.only(left: 25, right: 25,),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.amber.shade400, width: 3),
+                          borderRadius: BorderRadius.circular(30),
+                          //color: Colors.amber.shade400
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(top: 13),
+                            ),
+                            Text("COMPANY EMPLOYEES", style: TextStyle(
+                              color: Colors.amber.shade400,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20
+                            ),
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(bottom: 15, top: 15),
+                                child: FlutterSlider(
+//                                  decoration: (
+//                                  ),
+//                                  decoration: BoxDecoration(
+//                                      color: Colors.amber.shade400
+//                                  ),
+                                  values: [300],
+                                  max: 500,
+                                  min: 0,
+                                  onDragging: (handlerIndex, lowerValue, upperValue) {
+                                    _lowerValue = lowerValue;
+                                    _upperValue = upperValue;
+                                    setState(() {});
+                                  },
+                                )
+//                        _input(FaIcon(FontAwesomeIcons.user), "COMPANY EMPLOYEES",
+//                            _companyEmployeesController, true),
+                            ),
+                          ],
+                        ),
+                      ),
                       Padding(
                         padding: EdgeInsets.only(
+                          top: 20,
                             left: 20,
                             right: 20,
                             bottom: MediaQuery.of(context).viewInsets.bottom),
