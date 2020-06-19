@@ -392,7 +392,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           bottom: 15,
                         ),
                         child: _input
-                          ( FaIcon(FontAwesomeIcons.warehouse),
+                          ( FaIcon(FontAwesomeIcons.industry, size: 10,),
                             "COMPANY NAME",
                             _emailController,
                             false),
