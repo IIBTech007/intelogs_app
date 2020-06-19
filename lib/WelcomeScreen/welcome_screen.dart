@@ -42,6 +42,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Color primary = Theme.of(context).primaryColor;
     void initState() {
       super.initState();
+
     }
 
     //GO logo widget
@@ -432,29 +433,31 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             _companyNameController,
                             false),
                       ),
-//                      Padding(
-//                        padding: const EdgeInsets.only(left: 25, right: 25,top: 10),
-//                        child: FormBuilderDropdown(
-//                          attribute: "COMPANY TYPE",
-//                          validators: [FormBuilderValidators.required()],
-//                          hint: Text("COMPANY TYPE", style: TextStyle(color: Colors.amber.shade400),),
-//                          items: company_type.map((name) => DropdownMenuItem(
-//                              value: name, child: Text("$name")))
-//                              .toList(),
-//                          onChanged: (value){
-//                            setState(() {
-//
-//                            });
-//                          },
-//                          style: Theme.of(context).textTheme.body1,
-//                          decoration: InputDecoration(icon: FaIcon(FontAwesomeIcons.question,),labelText: "COMPANY TYPE", labelStyle: TextStyle(color: Colors.amber.shade400),
-//                            border: OutlineInputBorder(
-//                                borderRadius: BorderRadius.circular(9.0),
-//                                borderSide: BorderSide(color: Colors.amber.shade400, width: 3.0)
-//                            ),
-//                          ),
-//                        ),
-//                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25, right: 25,top: 10, bottom: 20),
+                        child: FormBuilderDropdown(
+                          initialValue: 12,
+                          attribute: "COMPANY TYPE",
+                          validators: [FormBuilderValidators.required()],
+                          hint: Text("COMPANY TYPE", style: TextStyle(color: Colors.amber.shade400),),
+                          items: company_type.map((name) => DropdownMenuItem(
+                              value: name, child: Text("$name")))
+                              .toList(),
+                          onChanged: (value){
+                            setState(() {
+
+                            });
+                          },
+                          style: Theme.of(context).textTheme.body1,
+                          decoration: InputDecoration(labelText: "COMPANY TYPE", labelStyle: TextStyle(color: Colors.amber.shade400, fontWeight: FontWeight.bold),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide(color: Colors.amber.shade400, width: 3.0)
+                            ),
+                          ),
+                        ),
+                      ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 15),
                         child: _input(FaIcon(FontAwesomeIcons.question), "COMPANY TYPE",
@@ -525,6 +528,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             Padding(
                                 padding: EdgeInsets.only(bottom: 15, top: 15),
                                 child: FlutterSlider(
+
 //                                  decoration: (
 //                                  ),
 //                                  decoration: BoxDecoration(
@@ -545,6 +549,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           ],
                         ),
                       ),
+//                      FormBuilderSlider(
+//                        attribute: "slider",
+//                        validators: [FormBuilderValidators.min(6)],
+//                        min: 0.0,
+//                        max: 10.0,
+//                        initialValue: 1.0,
+//                        divisions: 20,
+//                        decoration:
+//                        InputDecoration(labelText: "Number of things"),
+//                      ),
                       Padding(
                         padding: EdgeInsets.only(
                           top: 20,
