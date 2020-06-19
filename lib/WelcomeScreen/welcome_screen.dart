@@ -278,12 +278,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 20, top: 60),
-                          child: _input(FaIcon(FontAwesomeIcons.dharmachakra,), "EMAIL",
+                          child: _input(FaIcon(FontAwesomeIcons.envelope,), "EMAIL",
                               _emailController, false),
                         ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 20),
-                          child: _input(FaIcon(FontAwesomeIcons.dharmachakra,), "PASSWORD",
+                          child: _input(FaIcon(FontAwesomeIcons.lock,), "PASSWORD",
                               _passwordController, true),
                         ),
                         SizedBox(
@@ -338,9 +338,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           child: IconButton(
                             onPressed: () {
                               Navigator.of(context).pop();
+                              _companyNameController.clear();
+                              _companyTypeController.clear();
+                              _companyEmployeesController.clear();
+                              _personNameController.clear();
                               _emailController.clear();
-                              _passwordController.clear();
-                              _nameController.clear();
+                              _personContactController.clear();
                             },
                             icon: Icon(
                               Icons.close,
@@ -376,7 +379,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             Positioned(
                               child: Container(
                                // padding: EdgeInsets.only(bottom: 25, right: 40),
-                                child: Image.asset('assets/Intellogs.png',width: 200,height: 200,),
+                                child: Image.asset('assets/Intellogs.png',width: 250,height: 250,),
                                 alignment: Alignment.center,
                               ),
                             ),
