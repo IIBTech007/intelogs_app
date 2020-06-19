@@ -106,7 +106,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           controller: controller,
           obscureText: obsecure,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 15,
           ),
           decoration: InputDecoration(
               hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -130,7 +130,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   data: IconThemeData(color: Theme.of(context).primaryColor),
                   child: icon,
                 ),
-                padding: EdgeInsets.only(left: 30, right: 10),
+                padding: EdgeInsets.only(left: 30, right: 10, top: 10),
               )),
         ),
       );
@@ -409,7 +409,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 15),
-                        child: _input(FaIcon(FontAwesomeIcons.user), "PERSON NAME",
+                        child: _input(FaIcon(FontAwesomeIcons.idCard), "PERSON NAME",
                             _personNameController, true),
                       ),
                       Padding(
