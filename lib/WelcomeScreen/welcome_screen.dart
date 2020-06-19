@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intelogsapp/json_services/api_services.dart';
@@ -34,6 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   double _lowerValue;
   double _upperValue;
   bool _obsecure = false;
+  List<String> company_type=[];
 
   @override
   Widget build(BuildContext context) {
@@ -430,6 +432,29 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             _companyNameController,
                             false),
                       ),
+//                      Padding(
+//                        padding: const EdgeInsets.only(left: 25, right: 25,top: 10),
+//                        child: FormBuilderDropdown(
+//                          attribute: "COMPANY TYPE",
+//                          validators: [FormBuilderValidators.required()],
+//                          hint: Text("COMPANY TYPE", style: TextStyle(color: Colors.amber.shade400),),
+//                          items: company_type.map((name) => DropdownMenuItem(
+//                              value: name, child: Text("$name")))
+//                              .toList(),
+//                          onChanged: (value){
+//                            setState(() {
+//
+//                            });
+//                          },
+//                          style: Theme.of(context).textTheme.body1,
+//                          decoration: InputDecoration(icon: FaIcon(FontAwesomeIcons.question,),labelText: "COMPANY TYPE", labelStyle: TextStyle(color: Colors.amber.shade400),
+//                            border: OutlineInputBorder(
+//                                borderRadius: BorderRadius.circular(9.0),
+//                                borderSide: BorderSide(color: Colors.amber.shade400, width: 3.0)
+//                            ),
+//                          ),
+//                        ),
+//                      ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 15),
                         child: _input(FaIcon(FontAwesomeIcons.question), "COMPANY TYPE",
