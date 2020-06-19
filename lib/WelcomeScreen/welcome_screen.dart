@@ -507,7 +507,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 //                                  ),
                                   values: [300],
                                   max: 500,
-                                  min: 0,
+                                  min: 100,
                                   onDragging: (handlerIndex, lowerValue, upperValue) {
                                     _lowerValue = lowerValue;
                                     _upperValue = upperValue;
