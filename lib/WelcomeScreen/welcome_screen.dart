@@ -392,35 +392,35 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           bottom: 15,
                         ),
                         child: _input
-                          ( FaIcon(FontAwesomeIcons.industry, size: 10,),
+                          ( FaIcon(FontAwesomeIcons.industry,),
                             "COMPANY NAME",
-                            _emailController,
+                            _companyNameController,
                             false),
                       ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 15),
                         child: _input(FaIcon(FontAwesomeIcons.question), "COMPANY TYPE",
-                            _passwordController, true),
+                            _companyTypeController, true),
                       ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 15),
                         child: _input(FaIcon(FontAwesomeIcons.user), "COMPANY EMPLOYEES",
-                            _passwordController, true),
+                            _companyEmployeesController, true),
                       ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 15),
                         child: _input(FaIcon(FontAwesomeIcons.user), "PERSON NAME",
-                            _passwordController, true),
+                            _personNameController, true),
                       ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 15),
                         child: _input(FaIcon(FontAwesomeIcons.envelope), "EMAIL",
-                            _passwordController, true),
+                            _emailController, true),
                       ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 15),
                         child: _input(FaIcon(FontAwesomeIcons.mobile), "PERSON CONTACT",
-                            _passwordController, true),
+                            _personContactController, true),
                       ),
                       Padding(
                         padding: EdgeInsets.only(
