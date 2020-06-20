@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -35,7 +34,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   double _lowerValue;
   double _upperValue;
   bool _obsecure = false;
-  List<String> company_type=[];
+  List<String> company_type=["Software","Services"];
 
   @override
   Widget build(BuildContext context) {
@@ -433,27 +432,49 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             _companyNameController,
                             false),
                       ),
-
                       Padding(
-                        padding: const EdgeInsets.only(left: 25, right: 25,top: 10, bottom: 20),
+                        padding: const EdgeInsets.only(left: 16,right: 16),
                         child: FormBuilderDropdown(
-                          initialValue: 12,
-                          attribute: "COMPANY TYPE",
-                          validators: [FormBuilderValidators.required()],
-                          hint: Text("COMPANY TYPE", style: TextStyle(color: Colors.amber.shade400),),
+                          initialValue: "Software",
+                          attribute: "Barn",
+                          hint: Text("Barn"),
                           items: company_type.map((name) => DropdownMenuItem(
                               value: name, child: Text("$name")))
                               .toList(),
-                          onChanged: (value){
-                            setState(() {
-
-                            });
-                          },
-                          style: Theme.of(context).textTheme.body1,
-                          decoration: InputDecoration(labelText: "COMPANY TYPE", labelStyle: TextStyle(color: Colors.amber.shade400, fontWeight: FontWeight.bold),
+                          style: Theme.of(context).textTheme.bodyText2,
+                          decoration: InputDecoration(labelText: "Barn",
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide(color: Colors.amber.shade400, width: 3.0)
+                                borderRadius: BorderRadius.circular(9.0),
+                                borderSide: BorderSide(color: Colors.teal, width: 1.0)
+                            ),
+                          ),
+                          onChanged: (value){
+
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25, right: 25,top: 10, bottom: 20),
+                        child: FormBuilder(
+                          child: FormBuilderDropdown(
+                            initialValue: "Software",
+                            attribute: "COMPANY TYPE",
+                            validators: [FormBuilderValidators.required()],
+                            hint: Text("COMPANY TYPE", style: TextStyle(color: Colors.amber.shade400),),
+                            items: company_type.map((name) => DropdownMenuItem(
+                                value: name, child: Text("$name")))
+                                .toList(),
+                            onChanged: (value){
+                              setState(() {
+
+                              });
+                            },
+                            //style: Theme.of(context).textTheme.body1,
+                            decoration: InputDecoration(labelText: "COMPANY TYPE", labelStyle: TextStyle(color: Colors.amber.shade400, fontWeight: FontWeight.bold),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide: BorderSide(color: Colors.amber.shade400, width: 3.0)
+                              ),
                             ),
                           ),
                         ),

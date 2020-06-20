@@ -28,6 +28,8 @@ dependencies:
   flushbar: ^1.10.4
   flutter_form_builder: ^3.7.1
   flutter_xlider: ^3.4.0
+  data_connection_checker: ^0.3.4
+  progress_dialog: ^1.2.4
 
 dev_dependencies:
   flutter_test:
