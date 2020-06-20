@@ -1,13 +1,14 @@
 import 'dart:convert';
-
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intelogsapp/json_services/api_services.dart';
 import 'package:intelogsapp/utils/Utils.dart';
+import 'package:intelogsapp/widgets/flushbar.dart';
 //import 'package:intelogsapp/widgets/flushbar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -36,7 +37,8 @@ class LoginScreenState  extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
+    return Scaffold(appBar: AppBar(title: Text("Login",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+        iconTheme: IconThemeData(color: Colors.white)),
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -63,10 +65,7 @@ class LoginScreenState  extends State<LoginScreen> {
                     child: Column(
                       children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.all(15),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(8),
+                          padding: EdgeInsets.all(16),
                           child: FormBuilderTextField(
                             //initialValue: "Person Email",
                             controller: person_email,
@@ -88,7 +87,7 @@ class LoginScreenState  extends State<LoginScreen> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(8),
+                          padding: EdgeInsets.all(16),
                           child: FormBuilderTextField(
                             //initialValue: "Person Email",
                             controller: password,
@@ -101,7 +100,7 @@ class LoginScreenState  extends State<LoginScreen> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15
                             ),
-                              icon: FaIcon(FontAwesomeIcons.envelope, color: Colors.amber.shade400,) ,
+                              icon: FaIcon(FontAwesomeIcons.lock, color: Colors.amber.shade400,) ,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(9.0),
                                   borderSide: BorderSide(color: Colors.amber.shade400, width: 3.0)
@@ -133,47 +132,58 @@ class LoginScreenState  extends State<LoginScreen> {
                                     fontSize: 20),
                               ),
                               onPressed: () {
-//                                if(!Utils.validateEmail(person_email.text)){
-//                                  Scaffold.of(context).showSnackBar(SnackBar(
-//                                    content: Text("Email Format is Invalid"),
-//                                    backgroundColor: Colors.red,
-//                                  ));
-//                                }else{
-//                                  Utils.check_connectivity().then((result){
-//                                    if(result){
-//                                      var pd= ProgressDialog(context, type: ProgressDialogType.Normal);
-//                                      pd.show();
-//                                      networks_helper.Sign_Up(company_name.text,type_id.toString(),NoOfEmployee,person_name.text, person_email.text,person_contact.text).then((response) async{
-//                                        pd.hide();
-//                                        var res = jsonDecode(response);
-//                                        if(res['error']!=true){
-//                                          print("success");
-//                                          Flushbar(
-//                                            duration: Duration(seconds: 4),
-//                                            title: "Opps", //ignored since titleText != null
-//                                            message: "error", //ignored since messageText != null
-//                                            titleText: Text("SignUp", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,color: Colors.yellow[600], fontFamily:"ShadowsIntoLightTwo"),),
-//                                            messageText: Text(" Successfully!", style: TextStyle(fontSize: 16.0, color: Colors.green,fontFamily: "ShadowsIntoLightTwo"),),
-//                                          )..show(context);
-//
-//                                        }else{
-//                                          print(res['message']);
-//                                          Flushbar(
-//                                            duration: Duration(seconds: 4),
-//                                            title: "Opps", //ignored since titleText != null
-//                                            message: "Error", //ignored since messageText != null
-//                                            titleText: Text("Signup", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,color: Colors.yellow[600], fontFamily:"ShadowsIntoLightTwo"),),
-//                                            messageText: Text(res['message'], style: TextStyle(fontSize: 16.0, color: Colors.red,fontFamily: "ShadowsIntoLightTwo"),),
-//                                          )..show(context);
-//                                        }
-//                                      });
-//                                    }else{
-//                                      //flushBar().flushbar("Networks Error", "make sure your internet", 4, context);
-//                                    }
-//                                  });
-//
-//                                }
+                                if(person_email.text==null||person_email.text.isEmpty){
+                                  flushBar().flushbar("Email ", "Required", 4, context);
+                                }
+                                else if(password.text==null||password.text.isEmpty){
+                                  flushBar().flushbar("Password", "Required", 4, context);
+                                }
+                                else if(!Utils.validateEmail(person_email.text)){
+                                  flushBar().flushbar("Email validation", "Please use avalid email", 4, context);
+                                }
+                                else{
+                                  Utils.check_connectivity().then((result){
+                                    if(result){
+                                      if (_fbKey.currentState.validate()) {
+                                        var pd = ProgressDialog(context,
+                                            type: ProgressDialogType.Normal);
+                                        pd.show();
+                                        networks_helper.Sign_In(person_email.text,password.text).then((response) async {
+                                          pd.hide();
+                                          var res = jsonDecode(response);
+                                          if(res['error']==true){
+                                           flushBar().flushbar("Invalid", res['message'], 4, context);
+                                          }else{
+                                            print(res);
+                                            if (res['error'] == false) {
+                                              print("success");
+                                              Flushbar(
+                                                duration: Duration(seconds: 4), title: "Opps", //ignored since titleText != null
+                                                message: "error", //ignored since messageText != null
+                                                titleText: Text("SignIn",
+                                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
+                                                      color: Colors.yellow[600], fontFamily: "ShadowsIntoLightTwo"),),
+                                                messageText: Text(res['message'], style: TextStyle(fontSize: 16.0,
+                                                    color: Colors.green, fontFamily: "ShadowsIntoLightTwo"),),
+                                              )..show(context);
+                                              SharedPreferences  prefs= await SharedPreferences.getInstance();
+                                              await prefs.setString("token", res['logedin_Tokken']);
+                                              await prefs.setString("loginUser", res['logedInUser']);
+                                              await prefs.setBool("isLogin", true);
+                                             // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Home()), (Route<dynamic> route) => false);
 
+                                            }else{
+                                              flushBar().flushbar("Error", res['message'], 4, context);
+                                            }
+                                          }
+                                        });
+                                      }
+                                    }else{
+                                      flushBar().flushbar("Networks Error", "make sure your internet", 4, context);
+                                    }
+                                  });
+
+                                }
                               },
                             ),
                             height: 50,

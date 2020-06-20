@@ -30,6 +30,7 @@ dependencies:
   flutter_xlider: ^3.4.0
   data_connection_checker: ^0.3.4
   progress_dialog: ^1.2.4
+  shared_preferences: ^0.5.7+3
 
 dev_dependencies:
   flutter_test:

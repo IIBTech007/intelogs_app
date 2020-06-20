@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intelogsapp/ForgotPasswordScreen.dart';
+import 'package:intelogsapp/LoginScreen.dart';
+import 'package:intelogsapp/SignUpScreen.dart';
 import 'package:intelogsapp/json_services/api_services.dart';
 import '../utils/clipper.dart';
 
@@ -619,8 +622,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             logo(),
             Padding(
               child: Container(
-                child: login_button("LOGIN", primary, Colors.white, Colors.white,
-                    primary, _loginSheet),
+                child: RaisedButton(
+                  highlightElevation: 0.0,
+                  splashColor: Colors.white,
+                  highlightColor: Theme.of(context).primaryColor,
+                  elevation: 0.0,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0)),
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color:Theme.of(context).primaryColor, fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                  },
+                ),
                 height: 50,
               ),
               padding: EdgeInsets.only(top: 80, left: 20, right: 20),
@@ -645,7 +663,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         fontSize: 20),
                   ),
                   onPressed: () {
-                    _registerSheet();
+                   // _registerSheet();
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SignupScreen()));
                   },
                 ),
                 height: 50,
@@ -659,7 +678,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   padding: EdgeInsets.only(top: 15,)
                 ),
                 InkWell(
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPasswordScreen()));
+                  },
                   child: Text("Forgot password?", style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
