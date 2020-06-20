@@ -6,7 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intelogsapp/json_services/api_services.dart';
 import 'package:intelogsapp/utils/Utils.dart';
-import 'package:intelogsapp/widgets/flushbar.dart';
+//import 'package:intelogsapp/widgets/flushbar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 
@@ -258,7 +258,7 @@ class SignupScreenState  extends State<SignupScreen> {
                                  if(result){
                                    var pd= ProgressDialog(context, type: ProgressDialogType.Normal);
                                    pd.show();
-                                   networks_helper.Sign_Up(company_name.text,type_id.toString(),NoOfEmployee,person_name.text, "example@mail.com",person_contact.text).then((response) async{
+                                   networks_helper.Sign_Up(company_name.text,type_id.toString(),NoOfEmployee,person_name.text, person_email.text,person_contact.text).then((response) async{
                                      pd.hide();
                                      var res = jsonDecode(response);
                                      if(res['error']!=true){
@@ -283,7 +283,7 @@ class SignupScreenState  extends State<SignupScreen> {
                                      }
                                    });
                                  }else{
-                                   flushBar().flushbar("Networks Error", "make sure your internet", 4, context);
+                                   //flushBar().flushbar("Networks Error", "make sure your internet", 4, context);
                                  }
                                });
 
