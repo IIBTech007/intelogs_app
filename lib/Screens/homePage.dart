@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intelogsapp/organization/skillsGroup.dart';
+import 'package:intelogsapp/organization/SkillGroup/skillsGroup.dart';
 import 'package:intelogsapp/widgets/gridBox.dart';
 
 
