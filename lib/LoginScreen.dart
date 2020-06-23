@@ -10,6 +10,8 @@ import 'package:intelogsapp/widgets/flushbar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Screens/homePage.dart';
+
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -168,9 +170,9 @@ class LoginScreenState  extends State<LoginScreen> {
                                               )..show(context);
                                               SharedPreferences  prefs= await SharedPreferences.getInstance();
                                               await prefs.setString("token", res['logedin_Tokken']);
-                                              await prefs.setString("loginUser", res['logedInUser']);
+                                              //await prefs.setString("loginUser", res['logedInUser']);
                                               await prefs.setBool("isLogin", true);
-                                             // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Home()), (Route<dynamic> route) => false);
+                                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => organizationalHomePage()), (Route<dynamic> route) => false);
 
                                             }else{
                                               flushBar().flushbar("Error", res['message'], 4, context);

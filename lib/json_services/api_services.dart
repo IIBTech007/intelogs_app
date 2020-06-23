@@ -70,4 +70,14 @@ class networks_helper{
       return null;
   }
 
+   static Future<String> skillsGroup(String token) async{
+     Map<String,String> headers = {'Authorization':'Bearer '+token};
+     final response = await http.get('http://192.236.147.77:8082/Intelogs/index.php/structure/?auth='+token+'&op=get_all_skill_groups',
+       headers: headers,
+     );
+     if(response.statusCode==200){
+       return response.body;
+     }else
+       return null;
+   }
 }
