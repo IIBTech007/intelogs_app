@@ -1,17 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intelogsapp/json_services/api_services.dart';
+import 'package:intelogsapp/widgets/detailPageWidgets/RowDetailPage.dart';
+import 'package:intelogsapp/widgets/detailPageWidgets/detailPageDescription.dart';
+import 'package:intelogsapp/widgets/flushbar.dart';
+
+import 'editSkillsGroup.dart';
 
 
 class SkillsGroupDetails extends StatefulWidget{
+  String token;
+  var specificskills;
+  SkillsGroupDetails(this.token,this.specificskills);
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _skills_group_details ();
+    return _skills_group_details (token,specificskills);
   }
 
 }
 
 class _skills_group_details extends State<SkillsGroupDetails>{
+  String token;
+  var specificSkillGroup;
+  _skills_group_details(this.token, this.specificSkillGroup);
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -20,6 +35,32 @@ class _skills_group_details extends State<SkillsGroupDetails>{
         backgroundColor: Colors.amber.shade400,
         title: Text("Skills Group Details"),
         centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+               networks_helper.deleteSkillsGroup(token, specificSkillGroup['skill_group_id']).then((value) {
+                 if(value==true){
+                   flushBar().flushbar("Skill Group", "Deleted", 4, context);
+                 }
+                 else{
+                   flushBar().flushbar("Skill Group", "Not Deleted", 4, context);
+                 }
+               });
+              },
+                child: Icon(Icons.delete,color: Colors.white,)
+            ),
+          ),
+        ],
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber[600],
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => editSkillGroup("jP1RYdAj",specificSkillGroup)),);
+        },
+        child: Icon(Icons.edit),
       ),
       body: Container(
         padding: EdgeInsets.only(left: 15, right: 15, top: 15 ),
@@ -32,129 +73,13 @@ class _skills_group_details extends State<SkillsGroupDetails>{
 //          mainAxisAlignment: MainAxisAlignment.start,
 //          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-              height: 55,
-              width: MediaQuery.of(context).size.width,
-              //height: MediaQuery.of(context).size.height * 0.075,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.grey.shade300
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                Text("Name:", style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 20
-                ),
-                ),
-                  Text("assets", style: TextStyle(
-                      //fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    fontSize: 18
-                  ),
-                  ),
-                ],
-              ),
-            ),
+            detailPageRowWidget().rowdetailpage("Name: ", specificSkillGroup['skill_group_name'], context),
             SizedBox(height: 5),
-            Container(
-              //padding: EdgeInsets.only(top: 15 ),
-              height: 55,
-              width: MediaQuery.of(context).size.width,
-              //height: MediaQuery.of(context).size.height * 0.075,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.grey.shade300
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Text("Code:", style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 20
-                  ),
-                  ),
-                  Text("#05MA94LA", style: TextStyle(
-                    //fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 18
-                  ),
-                  ),
-                ],
-              ),
-            ),
+            detailPageRowWidget().rowdetailpage("Code: ", specificSkillGroup['skill_group_code'], context),
+//            SizedBox(height: 5),
+//            detailPageRowWidget().rowdetailpage("Name: ", "content", context),
             SizedBox(height: 5),
-            Container(
-              height: 55,
-              width: MediaQuery.of(context).size.width,
-              //height: MediaQuery.of(context).size.height * 0.075,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.grey.shade300
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Text("Skill Group:", style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 20
-                  ),
-                  ),
-                  Text("Janitor", style: TextStyle(
-                    //fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 18
-                  ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 5),
-            Wrap(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(top: 15, bottom: 15 ),
-                  //height: 130,
-                  width: MediaQuery.of(context).size.width,
-                  //height: MediaQuery.of(context).size.height * 0.075,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.grey.shade300
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(left: 15),
-                        child: Text("Skill Description:", style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 20
-                        ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 15, top: 7),
-                        child: Text("My name is muzammal, i study in toilet, i work as janitor in IIB Tech", style: TextStyle(
-                          //fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 18
-                        ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            detailPageDesciption().detailPagedesciption("Description", specificSkillGroup['skill_group_description'], context)
           ],
         ),
       ),

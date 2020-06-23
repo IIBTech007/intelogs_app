@@ -6,6 +6,8 @@ import 'package:intelogsapp/utils/Utils.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'skillsGroupDetails.dart';
+
 
 class skillsGroup extends StatefulWidget{
   String token;
@@ -82,6 +84,11 @@ class _Profile_Page_State extends State<skillsGroup>{
 //            },
 //          )
 //        ],
+        ),floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+
+          },
         ),
 
         body: ListView.builder(itemCount:skillsGroupList!=null?skillsGroupList.length:temp.length,itemBuilder: (context,int index){
@@ -129,9 +136,7 @@ class _Profile_Page_State extends State<skillsGroup>{
                   trailing: Icon(Icons.arrow_right),
                   //leading: Image.asset("Assets/horses_icon.png"),
                   onTap: ()async{
-//                    prefs = await SharedPreferences.getInstance();
-                    //print((skillsGroupList[index]));
-                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>update_labTest(lablist[index]['id'],prefs.get('token'),prefs.get('createdBy'))));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SkillsGroupDetails("jP1RYdAj",skillsGroupList[index])),);
                   },
                 ),
                 secondaryActions: <Widget>[

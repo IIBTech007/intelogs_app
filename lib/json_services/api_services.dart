@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class networks_helper{
-   var url = "http://192.236.147.77:8082/Intelogs/";
+   static const BaseUrl = "http://192.236.147.77:8082/Intelogs/";
   static Future<String> Sign_In(String email,String password) async{
     Map<String,String> headers = {};
     var map = new Map<String, dynamic>();
     map['person_email'] = email;
     map['password'] = password;
    // final body = jsonEncode({"email":email,"password":password});
-    final response = await http.post('http://192.236.147.77:8082/Intelogs/registration/?op=company_signin',
+    final response = await http.post(BaseUrl+'registration/?op=company_signin',
       headers: headers,
       body: map,
     );
@@ -31,7 +31,7 @@ class networks_helper{
     map['person_contact'] = person_contact;
     final body = jsonEncode({"company_name":company_name,"company_type":company_type,
       "company_employees":NoOfEmployee,"person_name":person_name,"person_email":person_email,"person_contact":person_contact});
-    final response = await http.post('http://192.236.147.77:8082/Intelogs/registration/?op=company_registration',
+    final response = await http.post(BaseUrl+'registration/?op=company_registration',
       headers: headers,
       body: map,
     );
@@ -71,8 +71,9 @@ class networks_helper{
   }
 
    static Future<String> skillsGroup(String token) async{
-     Map<String,String> headers = {'Authorization':'Bearer '+token};
-     final response = await http.get('http://192.236.147.77:8082/Intelogs/index.php/structure/?auth='+token+'&op=get_all_skill_groups',
+     Map<String,String> headers = {};
+//     'Authorization':'Bearer '+token
+     final response = await http.get(BaseUrl+'index.php/structure/?auth='+token+'&op=get_all_skill_groups',
        headers: headers,
      );
      if(response.statusCode==200){
@@ -80,4 +81,33 @@ class networks_helper{
      }else
        return null;
    }
+   static Future<String> deleteSkillsGroup(String token,String id) async{
+     Map<String,String> headers = {};
+     var map = new Map<String, dynamic>();
+     map['skill_group_id'] = id;
+     final response = await http.post(BaseUrl+'index.php/structure/?auth='+token+'&op=delete_skill_group',
+       body: map,
+       headers: headers,
+     );
+     if(response.statusCode==200){
+       return response.body;
+     }else
+       return null;
+   }
+   static Future<String> editSkillsGroup(String token,String id,String name,String description) async{
+     Map<String,String> headers = {};
+     var map = new Map<String, dynamic>();
+     map['skill_group_id'] = id;
+     map['skill_group_name'] = name;
+     map['skill_group_description'] = description;
+     final response = await http.post(BaseUrl+'index.php/structure/?auth='+token+'&op=edit_skill_group',
+       body: map,
+       headers: headers,
+     );
+     if(response.statusCode==200){
+       return response.body;
+     }else
+       return null;
+   }
+
 }

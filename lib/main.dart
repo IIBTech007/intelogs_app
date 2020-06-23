@@ -6,6 +6,7 @@ import 'package:intelogsapp/organization/SkillGroup/skillsGroupDetails.dart';
 import 'ForgotPasswordScreen.dart';
 import 'Screens/homePage.dart';
 import 'WelcomeScreen/welcome_screen.dart';
+import 'organization/SkillGroup/skillsGroup.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,13 +22,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      darkTheme: ThemeData(brightness: Brightness.dark),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           hintColor: Colors.amber.shade400,
           primaryColor:  Colors.amber.shade400,
           fontFamily: "Montserrat",
           canvasColor: Colors.transparent),
-      home: SkillsGroupDetails(),
+      home: skillsGroup("jP1RYdAj"),
     );
   }
 }

@@ -1,40 +1,36 @@
-import 'dart:convert';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intelogsapp/json_services/api_services.dart';
-import 'package:intelogsapp/utils/Utils.dart';
 import 'package:intelogsapp/widgets/flushbar.dart';
-//import 'package:intelogsapp/widgets/flushbar.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'Screens/homePage.dart';
 
 
-class LoginScreen extends StatefulWidget {
+class editSkillGroup extends StatefulWidget {
+  String token;
+  var specificskill;
+  editSkillGroup(this.token,this.specificskill);
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return LoginScreenState();
+    return LoginScreenState(token,specificskill);
   }
 
 }
 
-class LoginScreenState  extends State<LoginScreen> {
-  TextEditingController person_email, password;
+class LoginScreenState  extends State<editSkillGroup> {
+  String token;
+var specificskill;
+  LoginScreenState(this.token,this.specificskill);
+
+  TextEditingController name, description;
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey();
 
-  void initState() {
-    // TODO: implement initState
+  void initState() {// TODO: implement initState
     super.initState();
-    person_email = TextEditingController();
-    password = TextEditingController();
-
-
+    name = TextEditingController();
+    description = TextEditingController();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +65,13 @@ class LoginScreenState  extends State<LoginScreen> {
                         Padding(
                           padding: EdgeInsets.all(16),
                           child: FormBuilderTextField(
-                            //initialValue: "Person Email",
-                            controller: person_email,
-                            attribute: "Person Email",
+                            initialValue: specificskill['skill_group_name'],
+                            controller: name,
+                            attribute: "name",
                             keyboardType: TextInputType.emailAddress,
                             validators: [FormBuilderValidators.required()],
 
-                            decoration: InputDecoration(labelText: "PERSON EMAIL", labelStyle: TextStyle(
+                            decoration: InputDecoration(labelText: "Name", labelStyle: TextStyle(
                                 color: Colors.amber.shade400,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15
@@ -91,14 +87,13 @@ class LoginScreenState  extends State<LoginScreen> {
                         Padding(
                           padding: EdgeInsets.all(16),
                           child: FormBuilderTextField(
-                            //initialValue: "Person Email",
-                            controller: password,
-                            attribute: "Password",
-                            obscureText: true,
+                            initialValue: specificskill['skill_group_description'],
+                            controller: description,
+                            attribute: "des",
                             keyboardType: TextInputType.emailAddress,
                             validators: [FormBuilderValidators.required()],
 
-                            decoration: InputDecoration(labelText: "PASSWORD", labelStyle: TextStyle(
+                            decoration: InputDecoration(labelText: "Description", labelStyle: TextStyle(
                                 color: Colors.amber.shade400,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15
@@ -128,65 +123,21 @@ class LoginScreenState  extends State<LoginScreen> {
                                 borderRadius: new BorderRadius.circular(30.0),
                               ),
                               child: Text(
-                                "LOGIN",
+                                "Update",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.amber.shade400,
                                     fontSize: 20),
                               ),
                               onPressed: () {
-                                if(person_email.text==null||person_email.text.isEmpty){
-                                  flushBar().flushbar("Email ", "Required", 4, context);
-                                }
-                                else if(password.text==null||password.text.isEmpty){
-                                  flushBar().flushbar("Password", "Required", 4, context);
-                                }
-                                else if(!Utils.validateEmail(person_email.text)){
-                                  flushBar().flushbar("Email validation", "Please use avalid email", 4, context);
-                                }
-                                else{
-                                  Utils.check_connectivity().then((result){
-                                    if(result){
-                                      if (_fbKey.currentState.validate()) {
-                                        var pd = ProgressDialog(context,
-                                            type: ProgressDialogType.Normal);
-                                        pd.show();
-                                        networks_helper.Sign_In(person_email.text,password.text).then((response) async {
-                                          pd.hide();
-                                          var res = jsonDecode(response);
-                                          if(res['error']==true){
-                                           flushBar().flushbar("Invalid", res['message'], 4, context);
-                                          }else{
-                                            print(res);
-                                            if (res['error'] == false) {
-                                              print("success");
-                                              Flushbar(
-                                                duration: Duration(seconds: 4), title: "Opps", //ignored since titleText != null
-                                                message: "error", //ignored since messageText != null
-                                                titleText: Text("SignIn",
-                                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
-                                                      color: Colors.yellow[600], fontFamily: "ShadowsIntoLightTwo"),),
-                                                messageText: Text(res['message'], style: TextStyle(fontSize: 16.0,
-                                                    color: Colors.green, fontFamily: "ShadowsIntoLightTwo"),),
-                                              )..show(context);
-                                              SharedPreferences  prefs= await SharedPreferences.getInstance();
-                                              await prefs.setString("token", res['logedin_Tokken']);
-                                              //await prefs.setString("loginUser", res['logedInUser']);
-                                              await prefs.setBool("isLogin", true);
-                                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => organizationalHomePage()), (Route<dynamic> route) => false);
-
-                                            }else{
-                                              flushBar().flushbar("Error", res['message'], 4, context);
-                                            }
-                                          }
-                                        });
-                                      }
-                                    }else{
-                                      flushBar().flushbar("Networks Error", "make sure your internet", 4, context);
-                                    }
-                                  });
-
-                                }
+                               networks_helper.editSkillsGroup(token, specificskill['skill_group_id'], name.text, description.text).then((value) {
+                                 if(value == true){
+                                   flushBar().flushbar("Skill Group", "successfully edit", 4, context);
+                                 }
+                                 else{
+                                   flushBar().flushbar("Skills", "Error occur", 4, context);
+                                 }
+                               });
                               },
                             ),
                             height: 50,
@@ -197,7 +148,7 @@ class LoginScreenState  extends State<LoginScreen> {
                     ),
                   ),
                 )
-              ],
+              ]
             ),
           ),
         )
