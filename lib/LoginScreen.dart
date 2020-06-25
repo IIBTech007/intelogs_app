@@ -95,7 +95,7 @@ class LoginScreenState  extends State<LoginScreen> {
                             //initialValue: "Person Email",
                             controller: password,
                             attribute: "Password",
-                            obscureText: true,
+                            //obscureText: true,
                             keyboardType: TextInputType.emailAddress,
                             validators: [FormBuilderValidators.required()],
 

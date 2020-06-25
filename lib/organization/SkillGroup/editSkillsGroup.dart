@@ -30,6 +30,10 @@ var specificskill;
     super.initState();
     name = TextEditingController();
     description = TextEditingController();
+    setState(() {
+      name.text= specificskill['skill_group_name'];
+      description.text= specificskill['skill_group_description'];
+    });
   }
 
   @override
@@ -65,7 +69,7 @@ var specificskill;
                         Padding(
                           padding: EdgeInsets.all(16),
                           child: FormBuilderTextField(
-                            initialValue: specificskill['skill_group_name'],
+                           // initialValue: specificskill['skill_group_name']!=null?specificskill['skill_group_name']:null,
                             controller: name,
                             attribute: "name",
                             keyboardType: TextInputType.emailAddress,
@@ -87,7 +91,7 @@ var specificskill;
                         Padding(
                           padding: EdgeInsets.all(16),
                           child: FormBuilderTextField(
-                            initialValue: specificskill['skill_group_description'],
+                            //initialValue: specificskill['skill_group_description']!=null?specificskill['skill_group_description']:null,
                             controller: description,
                             attribute: "des",
                             keyboardType: TextInputType.emailAddress,

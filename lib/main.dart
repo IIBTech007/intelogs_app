@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intelogsapp/organization/SkillGroup/addSkillsGroup.dart';
-import 'organization/SkillGroup/AddSkill.dart';
+import 'package:intelogsapp/LoginScreen.dart';
+import 'package:intelogsapp/SignUpScreen.dart';
+import 'package:intelogsapp/organization/SkillGroup/skillsGroupDetails.dart';
+import 'ForgotPasswordScreen.dart';
+import 'Screens/homePage.dart';
+import 'WelcomeScreen/welcome_screen.dart';
 import 'organization/SkillGroup/skillsGroup.dart';
 
 void main() {
@@ -25,9 +29,8 @@ class MyApp extends StatelessWidget {
           primaryColor:  Colors.amber.shade400,
           fontFamily: "Montserrat",
           canvasColor: Colors.transparent),
-      //home: skillsGroup("jP1RYdAj"),
-      home: AddSkills(),
-
+      home: skillsGroup("jP1RYdAj"),
+     // LoginScreen()
     );
   }
 }

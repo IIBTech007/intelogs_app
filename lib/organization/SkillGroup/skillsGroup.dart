@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intelogsapp/json_services/api_services.dart';
 import 'package:intelogsapp/utils/Utils.dart';
+import 'package:intelogsapp/widgets/flushbar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,10 +35,11 @@ class _Profile_Page_State extends State<skillsGroup>{
 
   @override
   void initState () {
-//    labtest_services.horseIdLabtest(token, id).then((response){
+//    networks_helper.skillsGroupDropdown(token).then((response){
 //      setState(() {
 //        print(response);
-//        specifichorselab =json.decode(response);
+//        var dd =json.decode(response);
+//        print(dd);
 //
 //      });
 //
@@ -61,7 +63,7 @@ class _Profile_Page_State extends State<skillsGroup>{
           });
         });
       }else
-        print("network nahi hai");
+        flushBar().flushbar("Networks", "Please check your internet", 3, context);
     });
 
   }
@@ -110,7 +112,7 @@ class _Profile_Page_State extends State<skillsGroup>{
                     onTap: () async {
                       networks_helper.skillsGroup(token).then((response){
                         //replytile.removeWhere((item) => item.id == horse_list[index]['horseId']);
-                        print(response);
+                        //print(response);
                         if(response!=null){
 
                           Scaffold.of(context).showSnackBar(SnackBar(
