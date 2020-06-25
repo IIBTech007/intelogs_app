@@ -25,7 +25,7 @@ class _AddSkillsState extends State<AddSkills> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Skills Group"),
+        title: Text("Add Skills"),
         backgroundColor: Colors.amber.shade400,
       ),
       body: Container(
