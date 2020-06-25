@@ -87,7 +87,8 @@ class _Profile_Page_State extends State<skillsGroup>{
 //          )
 //        ],
         ),floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          backgroundColor: Colors.amber.shade400,
+          child: Icon(Icons.add, color: Colors.black,),
           onPressed: () {
 
           },
