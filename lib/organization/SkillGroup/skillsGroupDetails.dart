@@ -33,7 +33,13 @@ class _skills_group_details extends State<SkillsGroupDetails>{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber.shade400,
-        title: Text("Skills Group Details"),
+        title: Text("Skills Group Details",
+          style: TextStyle(
+          fontFamily: 'Montserrat',
+            fontSize: 25
+        ),
+        ),
+
         centerTitle: true,
         actions: <Widget>[
           Padding(
