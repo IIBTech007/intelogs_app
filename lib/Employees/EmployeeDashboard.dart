@@ -48,8 +48,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard>{
                          child: Container(
                            child:  CircleAvatar(
                              backgroundImage: AssetImage('assets/image.jpg'),
-                             //NetworkImage('https://media.harrypotterfanzone.com/harry-potter-prisoner-of-azkaban-portrait-3.jpg'),
-                             //backgroundColor: Colors.g,
                              radius: 80,
                            ),
                          ),
@@ -58,7 +56,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard>{
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Text("Harry Potter", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+                              Text("Harry Potter", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                               Text("harrypotter7@gmail.com", style: TextStyle(fontSize: 15),),
                               Row(
                                 children: <Widget>[

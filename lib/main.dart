@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intelogsapp/EmployeeDashboard.dart';
+import 'Employees/EmployeesPage.dart';
+import 'file:///C:/Users/WA/AndroidStudioProjects/intelogs_app/lib/Employees/EmployeeDashboard.dart';
 import 'package:intelogsapp/LoginScreen.dart';
 import 'package:intelogsapp/SignUpScreen.dart';
 import 'package:intelogsapp/organization/SkillGroup/skillsGroupDetails.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           fontFamily: "Montserrat",
           canvasColor: Colors.transparent),
       //home: skillsGroup("jP1RYdAj"),
-      home: EmployeeDashboard(),
+      home: EmployeesPage(),
      // LoginScreen()
     );
   }
