@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intelogsapp/EmployeeDashboard.dart';
 import 'package:intelogsapp/LoginScreen.dart';
 import 'package:intelogsapp/SignUpScreen.dart';
 import 'package:intelogsapp/organization/SkillGroup/skillsGroupDetails.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
           primaryColor:  Colors.amber.shade400,
           fontFamily: "Montserrat",
           canvasColor: Colors.transparent),
-      home: skillsGroup("jP1RYdAj"),
+      //home: skillsGroup("jP1RYdAj"),
+      home: EmployeeDashboard(),
      // LoginScreen()
     );
   }
