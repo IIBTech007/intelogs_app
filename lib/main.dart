@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intelogsapp/LoginScreen.dart';
-import 'package:intelogsapp/SignUpScreen.dart';
-import 'package:intelogsapp/organization/SkillGroup/skillsGroupDetails.dart';
-import 'ForgotPasswordScreen.dart';
-import 'Screens/homePage.dart';
-import 'WelcomeScreen/welcome_screen.dart';
+import 'package:intelogsapp/WelcomeScreen/welcome_screen.dart';
+import 'LoginScreen.dart';
 import 'organization/SkillGroup/skillsGroup.dart';
 
 void main() {
@@ -24,12 +20,13 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       darkTheme: ThemeData(brightness: Brightness.dark),
       debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
           hintColor: Colors.amber.shade400,
           primaryColor:  Colors.amber.shade400,
           fontFamily: "Montserrat",
           canvasColor: Colors.transparent),
-      home: skillsGroup("jP1RYdAj"),
+      home: WelcomeScreen(),
      // LoginScreen()
     );
   }

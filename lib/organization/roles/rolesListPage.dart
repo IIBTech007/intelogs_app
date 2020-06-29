@@ -1,20 +1,18 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intelogsapp/json_services/api_services.dart';
 import 'package:intelogsapp/utils/Utils.dart';
 import 'package:intelogsapp/widgets/flushbar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'AddSkill.dart';
-import 'SkillsDetailsPage.dart';
 
-
-class skillsList extends StatefulWidget{
+class rolePage extends StatefulWidget{
   String token;
 
 
-  skillsList (this.token);
+  rolePage (this.token);
 
   @override
   State<StatefulWidget> createState() {
@@ -23,29 +21,28 @@ class skillsList extends StatefulWidget{
   }
 
 }
-class _Profile_Page_State extends State<skillsList>{
+class _Profile_Page_State extends State<rolePage>{
   int id;
   SharedPreferences prefs;
   _Profile_Page_State (this.token);
 
   String token;
-  var skillsList;
+  var rolesList;
   var temp=[];
 
 
   @override
   void initState () {
-    print(token);
     Utils.check_connectivity().then((result){
       if(result) {
         ProgressDialog pd = ProgressDialog(
             context, isDismissible: true, type: ProgressDialogType.Normal);
         pd.show();
-        networks_helper.skillsList(token).then((response) {
+        networks_helper.rolesList(token).then((response) {
           pd.hide();
           setState(() {
             print(response);
-            skillsList = json.decode(response);
+            rolesList = json.decode(response);
           });
         });
       }else
@@ -74,29 +71,22 @@ class _Profile_Page_State extends State<skillsList>{
 //        ],
         ),floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),backgroundColor: Colors.amber[600],
-          onPressed: () async{
-           // prefs= await SharedPreferences.getInstance();
-            print(token);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => AddSkills(token)),);
+          onPressed: () {
 
           },
         ),
 
-        body: ListView.builder(itemCount:skillsList!=null?skillsList.length:temp.length,itemBuilder: (context,int index){
+        body: ListView.builder(itemCount:rolesList!=null?rolesList.length:temp.length,itemBuilder: (context,int index){
           return Column(
             children: <Widget>[
               ListTile(
                 //specifichorselab!=null?(specifichorselab[index]['testTypesdropDown']['name']):''
-                //title: Text("skillsList"),
-                title: Text(skillsList[index]['skill_name'].toString()!=null?skillsList[index]['skill_name'].toString():'empty'),
-                //subtitle: Text("anc"),
-                 subtitle: Text(skillsList[index]['skill_name_id'].toString()!= null?skillsList[index]['skill_name_id'].toString():'empty'),
+                title: Text(rolesList[index]['perm_role_name'].toString()!=null?rolesList[index]['perm_role_name'].toString():''),
+               // subtitle: Text(rolesList[index]['skill_name_id'].toString()!= null?rolesList[index]['skill_name_id'].toString():''),
                 trailing: Icon(Icons.arrow_right),
                 //leading: Image.asset("Assets/horses_icon.png"),
                 onTap: ()async{
-                  print(token);
-                  print(skillsList[index]['skill_id']);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => skillsDetails(token,skillsList[index])),);
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => SkillsGroupDetails("jP1RYdAj",rolesList[index])),);
                 },
               ),
               Divider(),

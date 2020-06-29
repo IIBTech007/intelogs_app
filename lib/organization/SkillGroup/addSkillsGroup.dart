@@ -1,17 +1,29 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intelogsapp/json_services/api_services.dart';
+import 'package:intelogsapp/widgets/flushbar.dart';
 
 class AddSkillsGroup extends StatefulWidget{
+  String token;
+
+  AddSkillsGroup(this.token);
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _AddSkillsGroupState();
+    return _AddSkillsGroupState(token);
   }
 
 }
 
 class _AddSkillsGroupState extends State<AddSkillsGroup> {
+  String token;
+
+  _AddSkillsGroupState(this.token);
+
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey();
   TextEditingController skill_group_name, description;
 
@@ -23,7 +35,8 @@ class _AddSkillsGroupState extends State<AddSkillsGroup> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Skills Group"),
+        title: Text("Add Skills Group",style: TextStyle(color: Colors.white,fontFamily: 'Montserrat'),),
+        iconTheme: IconThemeData(color: Colors.white,),
         backgroundColor: Colors.amber.shade400,
     ),
           body: Container(
@@ -106,72 +119,19 @@ class _AddSkillsGroupState extends State<AddSkillsGroup> {
                               color: Colors.amber.shade400,
                               fontSize: 20),
                         ),
-//                        onPressed: () {
-//
-//                          print(company_name.text);
-//                          print(type_id.toString());
-//                          print(NoOfEmployee);
-//                          if(!Utils.validateEmail(person_email.text)){
-//                            flushBar().flushbar("Email validation", "Please use avalid email", 4, context);
-//                          }else{
-//                            Utils.check_connectivity().then((result){
-//                              if(result){
-//                                if (_fbKey.currentState.validate()) {
-//                                  var pd = ProgressDialog(context,
-//                                      type: ProgressDialogType.Normal);
-//                                  pd.show();
-//                                  networks_helper.Sign_Up(
-//                                      company_name.text, type_id.toString(),
-//                                      NoOfEmployee, person_name.text,
-//                                      person_email.text,
-//                                      person_contact.text).then((
-//                                      response) async {
-//                                    pd.hide();
-//                                    var res = jsonDecode(response);
-//                                    print(res);
-//                                    if (res['error'] != true) {
-//                                      print("success");
-//                                      Flushbar(
-//                                        duration: Duration(seconds: 4), title: "Opps", //ignored since titleText != null
-//                                        message: "error", //ignored since messageText != null
-//                                        titleText: Text("SignUp",
-//                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
-//                                              color: Colors.yellow[600], fontFamily: "ShadowsIntoLightTwo"),),
-//                                        messageText: Text(res['message'], style: TextStyle(fontSize: 16.0,
-//                                            color: Colors.green, fontFamily: "ShadowsIntoLightTwo"),),
-//                                      )
-//                                        ..show(context);
-//                                    } else {
-//                                      print(res['message']);
-//                                      Flushbar(
-//                                        duration: Duration(seconds: 4),
-//                                        title: "Opps",
-//                                        //ignored since titleText != null
-//                                        message: "Error",
-//                                        //ignored since messageText != null
-//                                        titleText: Text("Signup",
-//                                          style: TextStyle(
-//                                              fontWeight: FontWeight.bold,
-//                                              fontSize: 20.0,
-//                                              color: Colors.yellow[600],
-//                                              fontFamily: "ShadowsIntoLightTwo"),),
-//                                        messageText: Text(res['message'],
-//                                          style: TextStyle(fontSize: 16.0,
-//                                              color: Colors.red,
-//                                              fontFamily: "ShadowsIntoLightTwo"),),
-//                                      )
-//                                        ..show(context);
-//                                    }
-//                                  });
-//                                }
-//                              }else{
-//                                flushBar().flushbar("Networks Error", "make sure your internet", 4, context);
-//                              }
-//                            });
-//
-//                          }
-//
-//                        },
+                        onPressed: () {
+                          if(_fbKey.currentState.validate())
+                          networks_helper.addSkillsGroup(token, skill_group_name.text, description.text).then((value){
+                            var res = jsonDecode(value);
+                            if(res['error']== false){
+                              flushBar().flushbar("Add SkillGroup", res['message'], 3, context);
+                              Navigator.pop(context);
+                            }
+                            else {
+                              flushBar().flushbar("Add SkillGroup error", res['message'], 3, context);
+                            }
+                          });
+                        },
                       ),
                       height: 50,
                     ),

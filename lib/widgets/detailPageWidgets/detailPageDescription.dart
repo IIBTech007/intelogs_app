@@ -22,16 +22,16 @@ class detailPageDesciption {
                 child: Text(title, style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
-                    fontSize: 20
+                    fontSize: 15
                 ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15, top: 7),
+                padding: EdgeInsets.only(left: 35, top: 7),
                 child: Text(content!=null?content:"", style: TextStyle(
                   //fontWeight: FontWeight.bold,
                     color: Colors.black,
-                    fontSize: 18
+                    fontSize: 15
                 ),
                 ),
               ),

@@ -1,37 +1,55 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intelogsapp/json_services/api_services.dart';
+import 'package:intelogsapp/widgets/flushbar.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 class AddSkills extends StatefulWidget{
+  String token;
+
+  AddSkills(this.token);
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _AddSkillsState();
+    return _AddSkillsState(token);
   }
 
 }
 
 class _AddSkillsState extends State<AddSkills> {
+  String token;
+
+  _AddSkillsState(this.token);
+
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey();
-  TextEditingController skill_group_name, description;
+  TextEditingController skill_name, description;
   List<String> skill_group=[];
-  String selected_skill_group;
+  String selected_skill,skill_weightage;
   int skill_group_id;
 
 
+  @override
+  void initState() {
+    skill_name = TextEditingController();
+    description = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Add Skills"),
         backgroundColor: Colors.amber.shade400,
       ),
-      body: Container(
-        color: Colors.white,
-        child: FormBuilder(
-          key: _fbKey,
+      body: FormBuilder(
+        key: _fbKey,
+        child: SingleChildScrollView(
+
           child: Column(
             children: <Widget>[
               Padding(
@@ -41,7 +59,7 @@ class _AddSkillsState extends State<AddSkills> {
                 padding: EdgeInsets.all(8),
                 child: FormBuilderTextField(
                   //initialValue: "Person Email",
-                  controller: skill_group_name,
+                  controller: skill_name,
                   attribute: "Skill Group Name",
                   keyboardType: TextInputType.emailAddress,
                   validators: [FormBuilderValidators.required()],
@@ -70,7 +88,7 @@ class _AddSkillsState extends State<AddSkills> {
                       .toList(),
                   onChanged: (value){
                     setState(() {
-                      selected_skill_group = value;
+                      selected_skill = value;
                       skill_group_id = skill_group.indexOf(value);
                     });
                   },
@@ -96,6 +114,7 @@ class _AddSkillsState extends State<AddSkills> {
                       //initialValue: "Person Email",
                       controller: description,
                       attribute: "Description",
+                      minLines: 2,
                       keyboardType: TextInputType.emailAddress,
                       validators: [FormBuilderValidators.required()],
                       decoration: InputDecoration(labelText: "DESCRIPTION", labelStyle: TextStyle(
@@ -110,7 +129,40 @@ class _AddSkillsState extends State<AddSkills> {
                         ),
                       ),
                     ),
-                  )
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: FormBuilderSlider(
+                      attribute: "Company Employees",
+                      validators: [FormBuilderValidators.min(100)],
+                      min: 1,
+                      max: 100,
+                      onChanged: (value){
+                        setState(() {
+                          skill_weightage = value.toString().substring(0,3);
+                          //print(NoOfEmployee);
+                        });
+                      },
+                      initialValue: 1,
+                      divisions: 99,
+                      activeColor: Colors.amber.shade400,
+                      inactiveColor: Colors.amber.shade400,
+                      decoration:
+                      InputDecoration( labelText: "COMPANY EMPLOYEES", labelStyle: TextStyle(
+                          color: Colors.amber.shade400,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14
+                      ),
+                       // icon: FaIcon(FontAwesomeIcons.ups, color: Colors.amber.shade400,) ,
+                              suffixIcon: Icon(FontAwesomeIcons.levelDownAlt),
+                              prefixIcon: Icon(FontAwesomeIcons.levelUpAlt),
+//                          border: OutlineInputBorder(
+//                              borderRadius: BorderRadius.circular(9.0),
+//                              borderSide: BorderSide(color: Colors.amber.shade400, width: 3.0)
+//                          ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               Padding(
@@ -137,72 +189,25 @@ class _AddSkillsState extends State<AddSkills> {
                           color: Colors.amber.shade400,
                           fontSize: 20),
                     ),
-//                        onPressed: () {
-//
-//                          print(company_name.text);
-//                          print(type_id.toString());
-//                          print(NoOfEmployee);
-//                          if(!Utils.validateEmail(person_email.text)){
-//                            flushBar().flushbar("Email validation", "Please use avalid email", 4, context);
-//                          }else{
-//                            Utils.check_connectivity().then((result){
-//                              if(result){
-//                                if (_fbKey.currentState.validate()) {
-//                                  var pd = ProgressDialog(context,
-//                                      type: ProgressDialogType.Normal);
-//                                  pd.show();
-//                                  networks_helper.Sign_Up(
-//                                      company_name.text, type_id.toString(),
-//                                      NoOfEmployee, person_name.text,
-//                                      person_email.text,
-//                                      person_contact.text).then((
-//                                      response) async {
-//                                    pd.hide();
-//                                    var res = jsonDecode(response);
-//                                    print(res);
-//                                    if (res['error'] != true) {
-//                                      print("success");
-//                                      Flushbar(
-//                                        duration: Duration(seconds: 4), title: "Opps", //ignored since titleText != null
-//                                        message: "error", //ignored since messageText != null
-//                                        titleText: Text("SignUp",
-//                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
-//                                              color: Colors.yellow[600], fontFamily: "ShadowsIntoLightTwo"),),
-//                                        messageText: Text(res['message'], style: TextStyle(fontSize: 16.0,
-//                                            color: Colors.green, fontFamily: "ShadowsIntoLightTwo"),),
-//                                      )
-//                                        ..show(context);
-//                                    } else {
-//                                      print(res['message']);
-//                                      Flushbar(
-//                                        duration: Duration(seconds: 4),
-//                                        title: "Opps",
-//                                        //ignored since titleText != null
-//                                        message: "Error",
-//                                        //ignored since messageText != null
-//                                        titleText: Text("Signup",
-//                                          style: TextStyle(
-//                                              fontWeight: FontWeight.bold,
-//                                              fontSize: 20.0,
-//                                              color: Colors.yellow[600],
-//                                              fontFamily: "ShadowsIntoLightTwo"),),
-//                                        messageText: Text(res['message'],
-//                                          style: TextStyle(fontSize: 16.0,
-//                                              color: Colors.red,
-//                                              fontFamily: "ShadowsIntoLightTwo"),),
-//                                      )
-//                                        ..show(context);
-//                                    }
-//                                  });
-//                                }
-//                              }else{
-//                                flushBar().flushbar("Networks Error", "make sure your internet", 4, context);
-//                              }
-//                            });
-//
-//                          }
-//
-//                        },
+                        onPressed: () {
+                          if(_fbKey.currentState.validate()) {
+                            ProgressDialog pd = ProgressDialog(context, type: ProgressDialogType.Normal);
+                            pd.show();
+                            networks_helper.addSkills(token, skill_name.text,
+                                description.text, selected_skill,
+                                skill_weightage).then((value) {
+                               pd.hide();
+                               var res = jsonDecode(value);
+                               if(res['error'] == false){
+                                 flushBar().flushbar("Adding skills", "Successfully", 3, context);
+                                 Navigator.pop(context);
+                               }
+                               else{
+                                 flushBar().flushbar("Adding Skills", "Failed", 3, context);
+                               }
+                            });
+                          }
+                        },
                   ),
                   height: 50,
                 ),

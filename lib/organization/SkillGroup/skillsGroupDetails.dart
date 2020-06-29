@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intelogsapp/json_services/api_services.dart';
@@ -33,25 +35,22 @@ class _skills_group_details extends State<SkillsGroupDetails>{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber.shade400,
-        title: Text("Skills Group Details",
-          style: TextStyle(
-          fontFamily: 'Montserrat',
-            fontSize: 25
-        ),
-        ),
+        title: Text("Skills Group Details", style: TextStyle(fontFamily: 'Montserrat', fontSize: 25,color: Colors.white),),
+        iconTheme: IconThemeData(color: Colors.white,),
 
-        centerTitle: true,
+//        centerTitle: true,
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () {
                networks_helper.deleteSkillsGroup(token, specificSkillGroup['skill_group_id']).then((value) {
-                 if(value==true){
+                 var res=jsonDecode(value);
+                 if(res == true){
                    flushBar().flushbar("Skill Group", "Deleted", 4, context);
                  }
                  else{
-                   flushBar().flushbar("Skill Group", "Not Deleted", 4, context);
+                   flushBar().flushbar("Skill Group", "not deleted", 4, context);
                  }
                });
               },
@@ -64,7 +63,7 @@ class _skills_group_details extends State<SkillsGroupDetails>{
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber[600],
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => editSkillGroup("jP1RYdAj",specificSkillGroup)),);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => editSkillGroup(token,specificSkillGroup)),);
         },
         child: Icon(Icons.edit),
       ),

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intelogsapp/organization/SkillGroup/skillsGroup.dart';
+import 'package:intelogsapp/organization/Skills/SkillsList.dart';
+import 'package:intelogsapp/organization/department/departmentListPage.dart';
 import 'package:intelogsapp/widgets/gridBox.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class organizationalHomePage extends StatelessWidget {
+  SharedPreferences prefs;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,8 +28,9 @@ class organizationalHomePage extends StatelessWidget {
               Column(mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   InkWell(borderRadius: BorderRadius.circular(100.0),
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>skillsGroup("abc")));
+                    onTap: () async{
+                      prefs= await SharedPreferences.getInstance();
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>skillsGroup(prefs.getString("token"))));
 
                     },
                     child: Container(
@@ -46,10 +51,16 @@ class organizationalHomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              gridBox().gridbox("Skills", Icons.lightbulb_outline, () {
+              gridBox().gridbox("Skills", Icons.lightbulb_outline, () async{
+                prefs= await SharedPreferences.getInstance();
+                print(prefs.getString("token"));
                 print("functions working");
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>skillsList(prefs.getString("token"))));
               }),
-              gridBox().gridbox("Departments", Icons.view_compact, () {
+              gridBox().gridbox("Departments", Icons.view_compact, () async{
+                prefs= await SharedPreferences.getInstance();
+                print(prefs.getString("token"));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>departmentPage(prefs.getString("token"))));
                 print("functions working");
               }),
               gridBox().gridbox("Sections", Icons.view_module, () {

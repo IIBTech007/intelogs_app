@@ -23,13 +23,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState  extends State<LoginScreen> {
-  TextEditingController person_email, password;
+  TextEditingController personEmail, password;
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey();
 
   void initState() {
     // TODO: implement initState
     super.initState();
-    person_email = TextEditingController();
+    personEmail = TextEditingController();
     password = TextEditingController();
 
 
@@ -71,7 +71,7 @@ class LoginScreenState  extends State<LoginScreen> {
                           padding: EdgeInsets.all(16),
                           child: FormBuilderTextField(
                             //initialValue: "Person Email",
-                            controller: person_email,
+                            controller: personEmail,
                             attribute: "Person Email",
                             keyboardType: TextInputType.emailAddress,
                             validators: [FormBuilderValidators.required()],
@@ -136,23 +136,22 @@ class LoginScreenState  extends State<LoginScreen> {
                                     fontSize: 20),
                               ),
                               onPressed: () {
-                                if(person_email.text==null||person_email.text.isEmpty){
+                                if(personEmail.text==null||personEmail.text.isEmpty){
                                   flushBar().flushbar("Email ", "Required", 4, context);
                                 }
                                 else if(password.text==null||password.text.isEmpty){
                                   flushBar().flushbar("Password", "Required", 4, context);
                                 }
-                                else if(!Utils.validateEmail(person_email.text)){
+                                else if(!Utils.validateEmail(personEmail.text)){
                                   flushBar().flushbar("Email validation", "Please use avalid email", 4, context);
                                 }
                                 else{
                                   Utils.check_connectivity().then((result){
                                     if(result){
                                       if (_fbKey.currentState.validate()) {
-                                        var pd = ProgressDialog(context,
-                                            type: ProgressDialogType.Normal);
+                                        var pd = ProgressDialog(context, type: ProgressDialogType.Normal);
                                         pd.show();
-                                        networks_helper.Sign_In(person_email.text,password.text).then((response) async {
+                                        networks_helper.Sign_In(personEmail.text,password.text).then((response) async {
                                           pd.hide();
                                           var res = jsonDecode(response);
                                           if(res['error']==true){

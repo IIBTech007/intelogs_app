@@ -13,19 +13,26 @@ class detailPageRowWidget {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(title, style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 20
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(title, style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                fontSize: 15
+            ),
+            ),
           ),
-          ),
-          Text(content!=null?content:"", style: TextStyle(
-            //fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 18
-          ),
+          SizedBox(width: 10,),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(content!=null?content:"", style: TextStyle(
+              //fontWeight: FontWeight.bold,
+                color: Colors.black,
+                fontSize: 15
+            ),
+            ),
           ),
         ],
       ),
