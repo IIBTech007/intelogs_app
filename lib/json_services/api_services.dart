@@ -450,7 +450,6 @@ class networks_helper{
     try {
       Response responseDio = await Dio().get(url,);
       print(responseDio);
-      print("object");
       if(responseDio.statusCode== 200) {
         return responseDio.data;
       }
