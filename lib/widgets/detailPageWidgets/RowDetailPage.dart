@@ -13,7 +13,7 @@ class detailPageRowWidget {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -24,6 +24,7 @@ class detailPageRowWidget {
             ),
             ),
           ),
+          Divider(color: Colors.yellow,height: 20,thickness: 10.0,),
           SizedBox(width: 10,),
           Padding(
             padding: const EdgeInsets.all(8.0),

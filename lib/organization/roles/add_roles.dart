@@ -57,7 +57,7 @@ class _AddRoles_State extends State<AddRoles>{
                         //initialValue: "Person Email",
                         controller: role_name,
                         attribute: "Role Name",
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.text,
                         validators: [FormBuilderValidators.required()],
 
                         decoration: InputDecoration(labelText: "ROLE NAME", labelStyle: TextStyle(
