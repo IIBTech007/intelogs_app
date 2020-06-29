@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intelogsapp/organization/position/add_position_in_details.dart';
+import 'package:intelogsapp/organization/position/roles_details.dart';
 
 class PositionDetailPage extends StatefulWidget{
   String token;
@@ -78,7 +80,7 @@ class _PositionDetail_State extends State<PositionDetailPage>{
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber[600],
         onPressed: () {
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => editDepartment(token,specNew)),);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddPosition_in_Details(token)),);
         },
         child: Icon(Icons.edit),
       ),
@@ -196,12 +198,14 @@ class _PositionDetail_State extends State<PositionDetailPage>{
               color: Colors.grey.shade200,
               child: Column(
                 children: <Widget>[
-                  Text("Permission Roles"),
+                  Text("Permission Roles", style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ), ),
                   ListTile(
                     trailing: Icon(Icons.arrow_right),
-                    title: Text("Organizational Incharge"),
+                    title: Text("Organizational Incharge", ),
                     onTap: (){
-
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => RolesDetails()),);
                     },
                   ),
                 ],
