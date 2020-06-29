@@ -1,10 +1,8 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:intelogsapp/utils/TabComponents/monthly.dart';
 import 'package:intelogsapp/utils/TabComponents/today.dart';
-
 import 'TabComponents/weekly.dart';
 
 class HomeScreen extends StatefulWidget {
