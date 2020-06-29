@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flip_panel/flip_panel.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -9,6 +10,8 @@ import 'package:intelogsapp/LoginScreen.dart';
 import 'package:intelogsapp/SignUpScreen.dart';
 import 'package:intelogsapp/json_services/api_services.dart';
 import '../utils/clipper.dart';
+import 'dart:async';
+import 'dart:math';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -38,6 +41,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   double _upperValue;
   bool _obsecure = false;
   List<String> company_type=["Software","Services"];
+
+  final imageWidth = 320.0;
+  final imageHeight = 171.0;
+  final toleranceFactor = 0.033;
+  final widthFactor = 0.125;
+  final heightFactor = 0.5;
+
+  final random = Random();
 
   @override
   Widget build(BuildContext context) {
@@ -69,19 +80,113 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 //                height: 154,
 //              )),
               Positioned(
-                child: Container(
-                    height: 154,
-                    child: Align(
-                      child: Image.asset('assets/Intellogs.png',width: 340,height: 340,),
-//                      child: Text(
-//                        "GO",
-//                        style: TextStyle(
-//                          fontSize: 120,
-//                          fontWeight: FontWeight.bold,
-//                          color: Theme.of(context).primaryColor,
-//                        ),
-//                      ),
-                    )),
+              child: Container(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                        ]
+                            .map((count) => FlipPanel.stream(
+                          itemStream: Stream.fromFuture(Future.delayed(
+                              Duration(milliseconds: random.nextInt(20) * 100),
+                                  () => 1)),
+                          itemBuilder: (_, value) => value <= 0
+                              ? Container(
+                            color: Colors.amber.shade400,
+                            width: widthFactor * imageWidth,
+                            height: heightFactor * imageHeight,
+                          )
+                              : ClipRect(
+                              child: Align(
+                                  alignment: Alignment(
+                                      -1.0 +
+                                          count * 2 * 0.125 +
+                                          count * toleranceFactor,
+                                      -1.0),
+                                  widthFactor: widthFactor,
+                                  heightFactor: heightFactor,
+                                  child: Image.asset(
+                                    'assets/Intellogs.png',
+                                    width: imageWidth,
+                                    height: imageHeight,
+                                  ))),
+                          initValue: 0,
+                          spacing: 0.0,
+                          direction: FlipDirection.up,
+                        ))
+                            .toList(),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                        ]
+                            .map((count) => FlipPanel.stream(
+                          itemStream: Stream.fromFuture(Future.delayed(
+                              Duration(milliseconds: random.nextInt(20) * 100),
+                                  () => 1)),
+                          itemBuilder: (_, value) => value <= 0
+                              ? Container(
+                            color: Colors.amber.shade400,
+                            width: widthFactor * imageWidth,
+                            height: heightFactor * imageHeight,
+                          )
+                              : ClipRect(
+                              child: Align(
+                                  alignment: Alignment(
+                                      -1.0 +
+                                          count * 2 * 0.125 +
+                                          count * toleranceFactor,
+                                      1.0),
+                                  widthFactor: widthFactor,
+                                  heightFactor: heightFactor,
+                                  child: Image.asset(
+                                    'assets/Intellogs.png',
+                                    width: imageWidth,
+                                    height: imageHeight,
+                                  ))),
+                          initValue: 0,
+                          spacing: 0.0,
+                          direction: FlipDirection.down,
+                        ))
+                            .toList(),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+//                Container(
+//                    height: 154,
+//                    child: Align(
+//                      child: Image.asset('assets/Intellogs.png',width: 340,height: 340,),
+////                      child: Text(
+////                        "GO",
+////                        style: TextStyle(
+////                          fontSize: 120,
+////                          fontWeight: FontWeight.bold,
+////                          color: Theme.of(context).primaryColor,
+////                        ),
+////                      ),
+//                    ),
+//                ),
               ),
 //              Positioned(
 //                width: MediaQuery.of(context).size.width * 0.15,

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intelogsapp/organization/position/add_position_in_details.dart';
+import 'package:intelogsapp/organization/position/permission_roles.dart';
 
 class RolesDetails extends StatefulWidget{
   @override
@@ -43,9 +45,9 @@ class _RolesDetails_State extends State<RolesDetails> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber[600],
         onPressed: () {
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => editDepartment(token,specNew)),);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => PermissionRoles("jP1RYdAj")),);
         },
-        child: Icon(Icons.arrow_forward, color: Colors.white,),
+        child: Icon(Icons.edit, color: Colors.white,),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -59,7 +61,7 @@ class _RolesDetails_State extends State<RolesDetails> {
             Container(
               padding: EdgeInsets.only(left: 20, right: 20),
               //padding: EdgeInsets.all(12),
-              height: 250,
+              height: 200,
               //width: 370,
               width: MediaQuery.of(context).size.width * 0.90,
               decoration: BoxDecoration(
