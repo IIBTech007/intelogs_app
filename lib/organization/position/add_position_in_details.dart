@@ -37,7 +37,13 @@ class _AddPosition_in_Details_State extends State<AddPosition_in_Details>{
         title: Text("Add Position"),
         backgroundColor: Colors.amber.shade400,
       ),
-
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber[600],
+        onPressed: () {
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => editDepartment(token,specNew)),);
+        },
+        child: Icon(Icons.add),
+      ),
       body: Scrollbar(
         child: ListView(
           children: <Widget>[
