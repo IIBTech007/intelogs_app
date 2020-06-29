@@ -37,6 +37,13 @@ class _PermissionRoles_State extends State<PermissionRoles>{
         title: Text("Permission Role"),
         backgroundColor: Colors.amber.shade400,
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber[600],
+        onPressed: () {
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => editDepartment(token,specNew)),);
+        },
+        child: Icon(Icons.edit),
+      ),
       body: Scrollbar(
         child: ListView(
           children: <Widget>[
