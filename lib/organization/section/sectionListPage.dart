@@ -55,7 +55,7 @@ class _Profile_Page_State extends State<sectionPage>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(backgroundColor: Colors.white,
-        appBar: AppBar(title: Text("Skills"),
+        appBar: AppBar(title: Text("Sections"),
 //          actions: <Widget>[
 //          Center(child: Text("Add New",textScaleFactor: 1.3,)),
 //          IconButton(
@@ -116,7 +116,7 @@ class _Profile_Page_State extends State<sectionPage>{
                 ],
                 child: ListTile(
                   //specifichorselab!=null?(specifichorselab[index]['testTypesdropDown']['name']):''
-                  title: Text(sectionList[index]['section_name'].toString()!=null?sectionList[index]['skill_name'].toString():''),
+                  title: Text(sectionList[index]['section_name'].toString()!=null?sectionList[index]['section_name'].toString():''),
                   subtitle: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[

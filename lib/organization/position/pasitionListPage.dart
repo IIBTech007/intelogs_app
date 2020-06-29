@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intelogsapp/json_services/api_services.dart';
+import 'package:intelogsapp/organization/position/PositionDetailPage.dart';
+import 'package:intelogsapp/organization/position/add_position.dart';
 import 'package:intelogsapp/utils/Utils.dart';
 import 'package:intelogsapp/widgets/flushbar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -55,7 +57,7 @@ class _Profile_Page_State extends State<positionPage>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(backgroundColor: Colors.white,
-        appBar: AppBar(title: Text("Skills"),
+        appBar: AppBar(title: Text("Positions"),
 //          actions: <Widget>[
 //          Center(child: Text("Add New",textScaleFactor: 1.3,)),
 //          IconButton(
@@ -72,6 +74,7 @@ class _Profile_Page_State extends State<positionPage>{
         ),floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),backgroundColor: Colors.amber[600],
           onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AddPosition("jP1RYdAj")),);
 
           },
         ),
@@ -86,7 +89,7 @@ class _Profile_Page_State extends State<positionPage>{
                 trailing: Icon(Icons.arrow_right),
                 //leading: Image.asset("Assets/horses_icon.png"),
                 onTap: ()async{
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => SkillsGroupDetails("jP1RYdAj",positionList[index])),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PositionDetailPage("jP1RYdAj",positionList[index])),);
                 },
               ),
               Divider(),

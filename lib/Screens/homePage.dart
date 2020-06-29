@@ -3,6 +3,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intelogsapp/organization/SkillGroup/skillsGroup.dart';
 import 'package:intelogsapp/organization/Skills/SkillsList.dart';
 import 'package:intelogsapp/organization/department/departmentListPage.dart';
+import 'package:intelogsapp/organization/position/pasitionListPage.dart';
+import 'package:intelogsapp/organization/roles/rolesListPage.dart';
+import 'package:intelogsapp/organization/section/sectionListPage.dart';
+import 'package:intelogsapp/organization/shifts/shiftsListPage.dart';
 import 'package:intelogsapp/widgets/gridBox.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -63,16 +67,28 @@ class organizationalHomePage extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>departmentPage(prefs.getString("token"))));
                 print("functions working");
               }),
-              gridBox().gridbox("Sections", Icons.view_module, () {
+              gridBox().gridbox("Sections", Icons.view_module, () async{
+                prefs= await SharedPreferences.getInstance();
+                print(prefs.getString("token"));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>sectionPage(prefs.getString("token"))));
                 print("functions working");
               }),
-              gridBox().gridbox("Shifts", Icons.group_work, () {
+              gridBox().gridbox("Shifts", Icons.group_work, () async{
+                prefs= await SharedPreferences.getInstance();
+                print(prefs.getString("token"));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>shiftPage(prefs.getString("token"))));
                 print("functions working");
               }),
-              gridBox().gridbox("Roles", FontAwesomeIcons.criticalRole, () {
+              gridBox().gridbox("Roles", FontAwesomeIcons.criticalRole, () async{
+                prefs= await SharedPreferences.getInstance();
+                print(prefs.getString("token"));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>rolePage(prefs.getString("token"))));
                 print("functions working");
               }),
-              gridBox().gridbox("Position", FontAwesomeIcons.alignCenter, () {
+              gridBox().gridbox("Position", FontAwesomeIcons.alignCenter, () async{
+                prefs= await SharedPreferences.getInstance();
+                print(prefs.getString("token"));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>positionPage(prefs.getString("token"))));
                 print("functions working");
               }),
               gridBox().gridbox("Employees", Icons.people, () {

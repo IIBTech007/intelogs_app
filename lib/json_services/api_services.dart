@@ -428,13 +428,14 @@ class networks_helper{
 
   static Future<String> rolesList(String token) async{
 
-    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=get_all_roles';
+    String url = BaseUrl+'index.php/module/?auth='+token+'&op=get_all_roles';
     try {
       Response responseDio = await Dio().get(url,);
       print(responseDio);
       print("object");
+      return responseDio.data;
       if(responseDio.statusCode== 200) {
-        return responseDio.data;
+
       }
       else{
         return null;

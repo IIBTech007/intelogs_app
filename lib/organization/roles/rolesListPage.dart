@@ -55,7 +55,7 @@ class _Profile_Page_State extends State<rolePage>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(backgroundColor: Colors.white,
-        appBar: AppBar(title: Text("Skills"),
+        appBar: AppBar(title: Text("Roles"),
 //          actions: <Widget>[
 //          Center(child: Text("Add New",textScaleFactor: 1.3,)),
 //          IconButton(
