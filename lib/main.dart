@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:intelogsapp/WelcomeScreen/welcome_screen.dart';
 import 'LoginScreen.dart';
 import 'organization/SkillGroup/skillsGroup.dart';
+import 'organization/roles/addPermission.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           primaryColor:  Colors.amber.shade400,
           fontFamily: "Montserrat",
           canvasColor: Colors.transparent),
-      home: WelcomeScreen(),
+      home: permissionPage(),
      // LoginScreen()
     );
   }

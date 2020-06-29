@@ -73,6 +73,8 @@ class networks_helper{
     map['person_name'] = person_name;
     map['person_email'] = person_email;
     map['person_contact'] = person_contact;
+
+
     final body = jsonEncode({"company_name":company_name,"company_type":company_type,
       "company_employees":NoOfEmployee,"person_name":person_name,"person_email":person_email,"person_contact":person_contact});
     final response = await http.post(BaseUrl+'registration/?op=company_registration',
@@ -426,6 +428,9 @@ class networks_helper{
     }
   }
 
+  /// Roles
+
+
   static Future<String> rolesList(String token) async{
 
     String url = BaseUrl+'index.php/module/?auth='+token+'&op=get_all_roles';
@@ -444,6 +449,184 @@ class networks_helper{
       print(e);
     }
   }
+
+  static Future<String> addRoles(String token,String name,String description,String manager) async{
+    String url = BaseUrl+'index.php/module/?auth='+token+'&op=add_Roles';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'department_name': name,
+        'department_description': description,
+        'role_permissions': [
+          {
+            "id": "1",
+            "pid": "1",
+            "select": false,
+            "permission": [
+              {
+                "name": "Create",
+                "select": true
+              },
+              {
+                "name": "Delete",
+                "select": true
+              }
+            ]
+          },
+          {
+            "permissionId": "2",
+            "id": "2",
+            "pid": "2",
+            "name": "Department Section Cruds",
+            "select": false,
+            "permission": [
+              {
+                "name": "Delete",
+                "select": true
+              }
+            ]
+          },
+          {
+            "permissionId": "42",
+            "id": "47",
+            "pid": "30",
+            "name": "process_attribute_crud",
+            "select": false,
+            "permission": [
+              {
+                "name": "Delete",
+                "select": true
+              }
+            ]
+          },
+          {
+            "permissionId": "43",
+            "id": "48",
+            "pid": "30",
+            "name": "process_schedule_crud",
+            "select": false,
+            "permission": [
+              {
+                "name": "Delete",
+                "select": true
+              },
+              {
+                "name": "Update",
+                "select": true
+              }
+            ]
+          },
+          {
+            "permissionId": "53",
+            "id": "40",
+            "pid": "21",
+            "name": "Work Order Crud",
+            "select": false,
+            "permission": [
+              {
+                "name": "List",
+                "select": true
+              },
+              {
+                "name": "Update",
+                "select": true
+              }
+            ]
+          },
+          {
+            "permissionId": "59",
+            "id": "60",
+            "pid": "43",
+            "name": "Codes",
+            "select": false,
+            "permission": [
+              {
+                "name": "Update",
+                "select": true
+              }
+            ]
+          },
+          {
+            "permissionId": "60",
+            "id": "61",
+            "pid": "43",
+            "name": "Attendance",
+            "select": false,
+            "permission": [
+              {
+                "name": "Read",
+                "select": true
+              }
+            ]
+          }
+        ],
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      return responsedio.data;
+
+      if (responsedio.statusCode == 200) {
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+  static Future<String> specificRoles(String token,String id) async{
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=single-department';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'department_id': id,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      return responsedio.data;
+      if (responsedio.statusCode == 200) {
+        return responsedio.data;
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+  static Future<String> deleterole(String token,String id) async{
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=deleteDepartment';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'department_id': id,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      return responsedio.data;
+
+      if (responsedio.statusCode == 200) {
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+  static Future<String> editRole(String token,String id,String name,String description,String manager) async{
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=updateDepartment';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'department_id': id,
+        'department_name': name,
+        'department_description': description,
+        'department_manager':manager,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      return responsedio.data;
+      if (responsedio.statusCode == 200) {
+
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+
+  ///Position
 
   static Future<String> positionList(String token) async{
 
