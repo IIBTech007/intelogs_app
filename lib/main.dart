@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           primaryColor:  Colors.amber.shade400,
           fontFamily: "Montserrat",
           canvasColor: Colors.transparent),
-      home: permissionPage(),
+      home: WelcomeScreen(),
      // LoginScreen()
     );
   }

@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:intelogsapp/json_services/api_services.dart';
+import 'package:intelogsapp/organization/roles/permission.dart';
+import 'file:///C:/Users/IIB/AndroidStudioProjects/intelogs_app/lib/organization/roles/modules.dart';
 import 'package:intelogsapp/widgets/flushbar.dart';
-
-
 
 class AddRoles extends StatefulWidget{
   String token;
@@ -19,16 +20,14 @@ class AddRoles extends StatefulWidget{
 
 class _AddRoles_State extends State<AddRoles>{
   String token;
+  List<Map> roles=[];
+  List<permission> permissions=[];
   _AddRoles_State(this.token);
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey();
   TextEditingController role_name, description;
 //  List<String> add_skill=[], position_roles=[], position_as=[], report_to=[];
 //  String selected_skill,skill_position_role, selected_position_as, selected_report_to;
 //  int skill_id, position_role_id, position_as_id, report_to_id ;
-
-
-
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -124,6 +123,14 @@ class _AddRoles_State extends State<AddRoles>{
                                 fontSize: 20),
                           ),
                           onPressed: () {
+                            permissions.add(permission(name: 'Create',select: true));
+                            permissions.add(permission(name: 'Delete',select: true));
+                            roles.add(modules(id: '1',pid: '1',select: true,permissions: permissions).toJson());
+                             networks_helper.addRoles(token, 'xyz', 'sfdsfd', roles).then((response){
+
+                               print(response);
+                               print("object");
+                             });
 //                            if(_fbKey.currentState.validate()) {
 //                              ProgressDialog pd = ProgressDialog(context, type: ProgressDialogType.Normal);
 //                              pd.show();

@@ -361,8 +361,7 @@ class networks_helper{
       var dio = Dio();
       FormData formData = new FormData.fromMap({
         'department_id': id,
-      });
-      var responsedio = await dio.post(url, data: formData,);
+      });      var responsedio = await dio.post(url, data: formData,);
       return responsedio.data;
 
       if (responsedio.statusCode == 200) {
@@ -450,118 +449,17 @@ class networks_helper{
     }
   }
 
-  static Future<String> addRoles(String token,String name,String description,String manager) async{
+  static Future<String> addRoles(String token,String name,String description,List<Map> role_permissions) async{
     String url = BaseUrl+'index.php/module/?auth='+token+'&op=add_Roles';
     try {
       var dio = Dio();
       FormData formData = new FormData.fromMap({
-        'department_name': name,
-        'department_description': description,
-        'role_permissions': [
-          {
-            "id": "1",
-            "pid": "1",
-            "select": false,
-            "permission": [
-              {
-                "name": "Create",
-                "select": true
-              },
-              {
-                "name": "Delete",
-                "select": true
-              }
-            ]
-          },
-          {
-            "permissionId": "2",
-            "id": "2",
-            "pid": "2",
-            "name": "Department Section Cruds",
-            "select": false,
-            "permission": [
-              {
-                "name": "Delete",
-                "select": true
-              }
-            ]
-          },
-          {
-            "permissionId": "42",
-            "id": "47",
-            "pid": "30",
-            "name": "process_attribute_crud",
-            "select": false,
-            "permission": [
-              {
-                "name": "Delete",
-                "select": true
-              }
-            ]
-          },
-          {
-            "permissionId": "43",
-            "id": "48",
-            "pid": "30",
-            "name": "process_schedule_crud",
-            "select": false,
-            "permission": [
-              {
-                "name": "Delete",
-                "select": true
-              },
-              {
-                "name": "Update",
-                "select": true
-              }
-            ]
-          },
-          {
-            "permissionId": "53",
-            "id": "40",
-            "pid": "21",
-            "name": "Work Order Crud",
-            "select": false,
-            "permission": [
-              {
-                "name": "List",
-                "select": true
-              },
-              {
-                "name": "Update",
-                "select": true
-              }
-            ]
-          },
-          {
-            "permissionId": "59",
-            "id": "60",
-            "pid": "43",
-            "name": "Codes",
-            "select": false,
-            "permission": [
-              {
-                "name": "Update",
-                "select": true
-              }
-            ]
-          },
-          {
-            "permissionId": "60",
-            "id": "61",
-            "pid": "43",
-            "name": "Attendance",
-            "select": false,
-            "permission": [
-              {
-                "name": "Read",
-                "select": true
-              }
-            ]
-          }
-        ],
+        'role_name': name,
+        'role_description': description,
+        'role_permissions': role_permissions,
       });
       var responsedio = await dio.post(url, data: formData,);
+       print(role_permissions[0]['permissions'][0].toJson());
       return responsedio.data;
 
       if (responsedio.statusCode == 200) {
