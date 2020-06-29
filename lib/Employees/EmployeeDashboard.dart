@@ -18,7 +18,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard>{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Employees Dashboard"),
+        title: Text("Employee Dashboard"),
     backgroundColor: Colors.amber.shade400,
     ),
       body: Container(
