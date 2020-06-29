@@ -5,21 +5,21 @@ import 'package:intelogsapp/widgets/flushbar.dart';
 
 
 
-class AddRoles extends StatefulWidget{
+class PermissionRoles extends StatefulWidget{
   String token;
 
-  AddRoles(this.token);
+  PermissionRoles(this.token);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _AddRoles_State(token);
+    return _PermissionRoles_State(token);
   }
 
 }
 
-class _AddRoles_State extends State<AddRoles>{
+class _PermissionRoles_State extends State<PermissionRoles>{
   String token;
-  _AddRoles_State(this.token);
+  _PermissionRoles_State(this.token);
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey();
   TextEditingController role_name, description;
 //  List<String> add_skill=[], position_roles=[], position_as=[], report_to=[];
@@ -34,7 +34,7 @@ class _AddRoles_State extends State<AddRoles>{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Role"),
+        title: Text("Permission Role"),
         backgroundColor: Colors.amber.shade400,
       ),
       body: Scrollbar(
@@ -80,7 +80,7 @@ class _AddRoles_State extends State<AddRoles>{
                           child: FormBuilderTextField(
                             //initialValue: "Person Email",
                             controller: description,
-                            attribute: "Description",
+                            attribute: "Role Description",
                             //keyboardType: TextInputType.emailAddress,
                             validators: [FormBuilderValidators.required()],
                             decoration: InputDecoration(labelText: "ROLE DESCRIPTION", labelStyle: TextStyle(
