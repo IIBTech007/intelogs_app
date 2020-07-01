@@ -4,6 +4,8 @@ import 'package:intelogsapp/organization/SkillGroup/skillsGroup.dart';
 import 'package:intelogsapp/organization/Skills/SkillsList.dart';
 import 'package:intelogsapp/organization/department/departmentListPage.dart';
 import 'package:intelogsapp/organization/position/pasitionListPage.dart';
+import 'package:intelogsapp/organization/roles/addPermission.dart';
+import 'package:intelogsapp/organization/roles/permissionSubModule.dart';
 import 'package:intelogsapp/organization/roles/rolesListPage.dart';
 import 'package:intelogsapp/organization/section/sectionListPage.dart';
 import 'package:intelogsapp/organization/shifts/shiftsListPage.dart';
@@ -22,7 +24,9 @@ class organizationalHomePage extends StatelessWidget {
           centerTitle: true,
         ),
         body: Center(
+
           child: GridView.count(
+
             primary: false,
             padding: const EdgeInsets.all(12),
             crossAxisSpacing: 25,
@@ -91,8 +95,16 @@ class organizationalHomePage extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>positionPage(prefs.getString("token"))));
                 print("functions working");
               }),
-              gridBox().gridbox("Employees", Icons.people, () {
+              gridBox().gridbox("Employees", Icons.people, () async {
                 print("functions working");
+                prefs= await SharedPreferences.getInstance();
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>permissionPage(prefs.getString("token"))));
+
+              }),
+              gridBox().gridbox("Employees", Icons.people, () async {
+
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ChildModule("","")));
+
               }),
 
 

@@ -10,7 +10,7 @@ class detailPageDesciption {
           width: MediaQuery.of(context).size.width,
           //height: MediaQuery.of(context).size.height * 0.075,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(10),
               color: Colors.grey.shade300
           ),
           child: Column(

@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
           hintColor: Colors.amber.shade400,
           primaryColor:  Colors.amber.shade400,
           fontFamily: "Montserrat",
-          canvasColor: Colors.transparent),
+          //canvasColor: Colors.white
+      ),
       home: WelcomeScreen(),
      // LoginScreen()
     );

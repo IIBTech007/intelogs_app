@@ -330,10 +330,6 @@ class networks_helper{
       });
       var responsedio = await dio.post(url, data: formData,);
       return responsedio.data;
-
-      if (responsedio.statusCode == 200) {
-      } else
-        return null;
     }catch (e) {
       print(e);
     }
@@ -448,6 +444,23 @@ class networks_helper{
       print(e);
     }
   }
+  static Future<String> permissionList(String token) async{
+
+    String url = BaseUrl+'index.php/module/?auth='+token+'&op=show_Modules';
+    try {
+      Response responseDio = await Dio().get(url,);
+      print("Permisstion list body");
+      return responseDio.data;
+      if(responseDio.statusCode== 200) {
+
+      }
+      else{
+        return null;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   static Future<String> addRoles(String token,String name,String description,List<Map> role_permissions) async{
     String url = BaseUrl+'index.php/module/?auth='+token+'&op=add_Roles';
@@ -470,11 +483,11 @@ class networks_helper{
     }
   }
   static Future<String> specificRoles(String token,String id) async{
-    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=single-department';
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=get_SpecificRole';
     try {
       var dio = Dio();
       FormData formData = new FormData.fromMap({
-        'department_id': id,
+        'role_id': id,
       });
       var responsedio = await dio.post(url, data: formData,);
       return responsedio.data;
@@ -542,10 +555,6 @@ class networks_helper{
       print(e);
     }
   }
-
-
-
-
 
 
 

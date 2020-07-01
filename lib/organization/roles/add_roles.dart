@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intelogsapp/json_services/api_services.dart';
 import 'package:intelogsapp/organization/roles/permission.dart';
-import 'file:///C:/Users/IIB/AndroidStudioProjects/intelogs_app/lib/organization/roles/modules.dart';
 import 'package:intelogsapp/widgets/flushbar.dart';
+
+import 'modules.dart';
 
 class AddRoles extends StatefulWidget{
   String token;
