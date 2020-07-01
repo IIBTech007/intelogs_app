@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intelogsapp/utils/application.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class EmployeeDashboard extends StatefulWidget{
+class EmployeeDashboards extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -12,7 +12,7 @@ class EmployeeDashboard extends StatefulWidget{
 
 }
 
-class _EmployeeDashboardState extends State<EmployeeDashboard>{
+class _EmployeeDashboardState extends State<EmployeeDashboards>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

@@ -10,6 +10,8 @@ import 'package:intelogsapp/organization/roles/rolesListPage.dart';
 import 'package:intelogsapp/organization/section/sectionListPage.dart';
 import 'package:intelogsapp/organization/shifts/shiftsListPage.dart';
 import 'package:intelogsapp/widgets/gridBox.dart';
+import 'package:intelogsapp/Employees/EmployeeDashboard.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -103,7 +105,7 @@ class organizationalHomePage extends StatelessWidget {
               }),
               gridBox().gridbox("Employees", Icons.people, () async {
 
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ChildModule("","")));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>EmployeeDashboards()));
 
               }),
 
