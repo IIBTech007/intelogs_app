@@ -8,7 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intelogsapp/ForgotPasswordScreen.dart';
 import 'package:intelogsapp/LoginScreen.dart';
 import 'package:intelogsapp/SignUpScreen.dart';
-import 'package:intelogsapp/json_services/api_services.dart';
+import 'package:intelogsapp/networks/organizationNetworks.dart';
 import '../utils/clipper.dart';
 import 'dart:async';
 import 'dart:math';

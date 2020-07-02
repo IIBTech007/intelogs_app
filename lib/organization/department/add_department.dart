@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:intelogsapp/json_services/api_services.dart';
+import 'package:intelogsapp/networks/organizationNetworks.dart';
 import 'package:intelogsapp/widgets/flushbar.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intelogsapp/json_services/api_services.dart';
+import 'package:intelogsapp/networks/organizationNetworks.dart';
 import 'package:intelogsapp/utils/Utils.dart';
 import 'package:intelogsapp/widgets/detailPageWidgets/RowDetailPage.dart';
 import 'package:intelogsapp/widgets/detailPageWidgets/detailPageDescription.dart';

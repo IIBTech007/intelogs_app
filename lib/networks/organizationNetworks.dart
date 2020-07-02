@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 
 class networks_helper{
-   static const BaseUrl = "http://192.236.147.77:8082/Intelogs/";
+  static const BaseUrl = "http://192.236.147.77:8082/Intelogs/";
 
 //  static postData(Map<String, dynamic> body,String url)async{
 //     var dio = Dio();
@@ -34,15 +34,15 @@ class networks_helper{
 //
 
 
-   static Future<String> Sign_In(String email,String password) async{
-     String url = BaseUrl + 'registration/?op=company_signin';
-     try {
-     var dio = Dio();
-     FormData formData = new FormData.fromMap({
-       'person_email': email,
-       'password': password,
-     });
-     var responsedio = await dio.post(url, data: formData,);
+  static Future<String> Sign_In(String email,String password) async{
+    String url = BaseUrl + 'registration/?op=company_signin';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'person_email': email,
+        'password': password,
+      });
+      var responsedio = await dio.post(url, data: formData,);
 //    Map<String,String> headers = {};
 //    var map = new Map<String, dynamic>();
 //    map['person_email'] = email;
@@ -54,13 +54,13 @@ class networks_helper{
 //      body: map,
 //    );
 //    print(response.body);
-     if (responsedio.statusCode == 200) {
-       return responsedio.data;
-     } else
-       return null;
-   }catch (e) {
-     print(e);
-   }
+      if (responsedio.statusCode == 200) {
+        return responsedio.data;
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
 
   }
   static Future<String> Sign_Up(String company_name,String company_type,String NoOfEmployee
@@ -90,7 +90,7 @@ class networks_helper{
     Map<String,String> headers = {};
     var map = new Map<String, dynamic>();
     map['recover_email'] = email;
-   // final body = jsonEncode({"email":email});
+    // final body = jsonEncode({"email":email});
     final response = await http.post('http://192.236.147.77:8083/api/Account/ForgotPassword',
       headers: headers,
       body: map,
@@ -117,20 +117,20 @@ class networks_helper{
   ///SkillsGroup
 
 
-   static Future<String> skillsGroup(String token) async{
+  static Future<String> skillsGroup(String token) async{
 
-   String url = BaseUrl+'index.php/structure/?auth='+token+'&op=get_all_skill_groups';
-     try {
-       Response responseDio = await Dio().get(url,);
-       if(responseDio.statusCode== 200) {
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=get_all_skill_groups';
+    try {
+      Response responseDio = await Dio().get(url,);
+      if(responseDio.statusCode== 200) {
         return responseDio.data;
-       }
-       else{
-         return null;
-       }
-     } catch (e) {
-       print(e);
-     }
+      }
+      else{
+        return null;
+      }
+    } catch (e) {
+      print(e);
+    }
 //     Map<String,String> headers = {};
 ////     'Authorization':'Bearer '+token
 //     final response = await http.get(BaseUrl+'index.php/structure/?auth='+token+'&op=get_all_skill_groups',
@@ -141,7 +141,7 @@ class networks_helper{
 //     }else
 //       return null;
 
-   }
+  }
 
   static Future<String> addSkillsGroup(String token,String name,String description) async {
     String url = BaseUrl + 'index.php/structure/?auth=' + token + '&op=add_skill_group';
@@ -161,36 +161,36 @@ class networks_helper{
     }
   }
 
-   static Future<String> deleteSkillsGroup(String token,String id) async{
-     Map<String,String> headers = {};
-     var map = new Map<String, dynamic>();
-     map['skill_group_id'] = id;
-     final response = await http.post(BaseUrl+'index.php/structure/?auth='+token+'&op=delete_skill_group',
-       body: map,
-       headers: headers,
-     );
-     if(response.statusCode==200){
-       return response.body;
-     }else
-       return null;
-   }
-   static Future<String> editSkillsGroup(String token,String id,String name,String description) async{
-     String url = BaseUrl+'index.php/structure/?auth='+token+'&op=edit_skill_group';
-     try {
-       var dio = Dio();
-       FormData formData = new FormData.fromMap({
-         'skill_group_id': id,
-         'skill_group_name': name,
-         'skill_group_description': description,
-       });
-       var responsedio = await dio.post(url, data: formData,);
-       if (responsedio.statusCode == 200) {
-         return responsedio.data;
-       } else
-         return null;
-     }catch (e) {
-       print(e);
-     }
+  static Future<String> deleteSkillsGroup(String token,String id) async{
+    Map<String,String> headers = {};
+    var map = new Map<String, dynamic>();
+    map['skill_group_id'] = id;
+    final response = await http.post(BaseUrl+'index.php/structure/?auth='+token+'&op=delete_skill_group',
+      body: map,
+      headers: headers,
+    );
+    if(response.statusCode==200){
+      return response.body;
+    }else
+      return null;
+  }
+  static Future<String> editSkillsGroup(String token,String id,String name,String description) async{
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=edit_skill_group';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'skill_group_id': id,
+        'skill_group_name': name,
+        'skill_group_description': description,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      if (responsedio.statusCode == 200) {
+        return responsedio.data;
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
 //     Map<String,String> headers = {};
 //     var map = new Map<String, dynamic>();
 //     map['skill_group_id'] = id;
@@ -205,10 +205,10 @@ class networks_helper{
 //     }else
 //       return null;
 
-   }
+  }
 
 
-   /// Skills
+  /// Skills
 
   static Future<String> skillsList(String token) async{
 
@@ -491,7 +491,7 @@ class networks_helper{
 
       });
       var responsedio = await dio.post(url, data: formData,);
-       print(role_permissions[0]['permissions'][0].toJson());
+      print(role_permissions[0]['permissions'][0].toJson());
       return responsedio.data;
 
       if (responsedio.statusCode == 200) {
