@@ -124,7 +124,7 @@ class _MyHomePageState extends State<ChildModule> {
                              networks_helper.addRoles(token,roleName, description, roles).then((response){
 
                                print(response);
-                               print("add roles response");
+                               print("add roles & permission response");
                              });
 
              })
