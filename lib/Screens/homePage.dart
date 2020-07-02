@@ -4,8 +4,6 @@ import 'package:intelogsapp/organization/SkillGroup/skillsGroup.dart';
 import 'package:intelogsapp/organization/Skills/SkillsList.dart';
 import 'package:intelogsapp/organization/department/departmentListPage.dart';
 import 'package:intelogsapp/organization/position/pasitionListPage.dart';
-import 'package:intelogsapp/organization/roles/addPermission.dart';
-import 'package:intelogsapp/organization/roles/permissionSubModule.dart';
 import 'package:intelogsapp/organization/roles/rolesListPage.dart';
 import 'package:intelogsapp/organization/section/sectionListPage.dart';
 import 'package:intelogsapp/organization/shifts/shiftsListPage.dart';
@@ -101,11 +99,7 @@ class organizationalHomePage extends StatelessWidget {
                // Navigator.push(context, MaterialPageRoute(builder: (context)=>permissionPage(prefs.getString("token"))));
 
               }),
-              gridBox().gridbox("Employees", Icons.people, () async {
 
-                //Navigator.push(context, MaterialPageRoute(builder: (context)=>ChildModule("","")));
-
-              }),
 
 
 
