@@ -98,12 +98,12 @@ class organizationalHomePage extends StatelessWidget {
               gridBox().gridbox("Employees", Icons.people, () async {
                 print("functions working");
                 prefs= await SharedPreferences.getInstance();
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>permissionPage(prefs.getString("token"))));
+               // Navigator.push(context, MaterialPageRoute(builder: (context)=>permissionPage(prefs.getString("token"))));
 
               }),
               gridBox().gridbox("Employees", Icons.people, () async {
 
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ChildModule("","")));
+                //Navigator.push(context, MaterialPageRoute(builder: (context)=>ChildModule("","")));
 
               }),
 

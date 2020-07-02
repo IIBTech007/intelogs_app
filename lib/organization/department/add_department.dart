@@ -22,6 +22,9 @@ class _AddSkillsGroupState extends State<AddDepartment> {
   String token;
   List _myActivities;
   String _myActivitiesResult;
+  List<String> managers_list=["Manager 1","Manager 2"];
+  String selected_manager;
+  int manager_id;
 
   _AddSkillsGroupState(this.token);
 
@@ -194,6 +197,44 @@ class _AddSkillsGroupState extends State<AddDepartment> {
 //              ),
               Padding(
                 padding: EdgeInsets.all(12),
+                child: FormBuilderDropdown(
+                  //initialValue: specificDepartment['managers_list']!=null?specificDepartment['managers_list'].toString():"",
+                  attribute: "manager",
+                  validators: [FormBuilderValidators.required()],
+                  hint: Text("Select Manager",style: TextStyle(color: Colors.amber,fontWeight: FontWeight.bold)),
+                  items: managers_list.map((name) => DropdownMenuItem(
+                      value: name,
+                      child: Text("$name",textScaleFactor:1.0,style: TextStyle(color: Colors.amber,fontWeight: FontWeight.bold),)))
+                      .toList(),
+                  onChanged: (value){
+                    setState(() {
+                      selected_manager = value;
+                      manager_id = managers_list.indexOf(value);
+                    });
+                  },
+                  onSaved: (value){
+                    setState(() {
+                      selected_manager = value;
+                      manager_id = managers_list.indexOf(value);
+                      print(selected_manager);
+                    });
+                  },
+                  style: Theme.of(context).textTheme.bodyText2,
+                  decoration: InputDecoration(labelText: "+ Manager", labelStyle: TextStyle(
+                    color: Colors.amber.shade400,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                    //icon: FaIcon(FontAwesomeIcons.question, color: Colors.amber.shade400,) ,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(9.0),
+                        borderSide: BorderSide(color: Colors.amber.shade400, width: 3.0)
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(12),
               ),
               Padding(
                 child: Container(
@@ -218,7 +259,7 @@ class _AddSkillsGroupState extends State<AddDepartment> {
                     ),
                     onPressed: () {
                       if(_fbKey.currentState.validate())
-                        networks_helper.addSkillsGroup(token, deparment_name.text, description.text).then((value){
+                        networks_helper.addDepartment(token, deparment_name.text, description.text,selected_manager).then((value){
                           var res = jsonDecode(value);
                           if(res['error']== false){
                             flushBar().flushbar("Add Department", res['message'], 3, context);

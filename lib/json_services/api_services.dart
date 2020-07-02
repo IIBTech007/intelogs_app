@@ -470,6 +470,25 @@ class networks_helper{
         'role_name': name,
         'role_description': description,
         'role_permissions': role_permissions,
+//        [
+//          {
+//            "id": "1",
+//            "pid": "1",
+//            "name": "Department Cruds",
+//            "select": false,
+//            "permission": [
+//              {
+//                "name": "Create",
+//                "select": true
+//              },
+//              {
+//                "name": "Delete",
+//                "select": true
+//              }
+//            ]
+//          },
+//        ]
+
       });
       var responsedio = await dio.post(url, data: formData,);
        print(role_permissions[0]['permissions'][0].toJson());

@@ -14,14 +14,15 @@ import 'permissionSubModule.dart';
 
 class permissionPage extends StatefulWidget{
   String token;
+  String roleName,description;
 
 
-  permissionPage (this.token);
+  permissionPage(this.token, this.roleName,this.description);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _Profile_Page_State(token);
+    return _Profile_Page_State(token,roleName,description);
   }
 
 }
@@ -29,8 +30,8 @@ class _Profile_Page_State extends State<permissionPage>{
   int id;
   bool checkBoxValue = true;
   SharedPreferences prefs;
-  _Profile_Page_State (this.token);
-  String token;
+  _Profile_Page_State (this.token,this.roleName,this.description);
+  String token,roleName,description;
   var rolesList;
   var temp=[];
   bool readVal = false;
@@ -113,12 +114,13 @@ class _Profile_Page_State extends State<permissionPage>{
 //            },
 //          )
 //        ],
-        ),floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),backgroundColor: Colors.amber[600],
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>AddRoles(token)));
-          },
         ),
+//        floatingActionButton: FloatingActionButton(
+//          child: Icon(Icons.add),backgroundColor: Colors.amber[600],
+//          onPressed: () {
+//            Navigator.push(context, MaterialPageRoute(builder: (context)=>AddRoles(token)));
+//          },
+//        ),
 
         body: ListView.builder(itemCount:rolesList!=null?rolesList.length:temp.length,itemBuilder: (context,int index){
           return Column(
@@ -128,7 +130,7 @@ class _Profile_Page_State extends State<permissionPage>{
                 subtitle: Text(rolesList[index]['child_mod_name']),
                 trailing: Icon(Icons.arrow_right),
                 onTap: ()async{
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => ChildModule(rolesList[index],token)),);
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => ChildModule(rolesList[index],token,roleName,description)),);
                 },
 //              children: <Widget>[
 //                ListTile(

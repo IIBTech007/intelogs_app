@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:intelogsapp/json_services/api_services.dart';
 import 'package:intelogsapp/widgets/raisedButton.dart';
+
+import 'modules.dart';
+import 'permission.dart';
 
 
 class ChildModule extends StatefulWidget {
-  var lsit;
-  String token;
+  var list;
+  String token,roleName,description;
 
-  ChildModule(this.lsit, this.token);
+  ChildModule(this.list, this.token,this.roleName,this.description);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState(lsit,token);
+  _MyHomePageState createState() => _MyHomePageState(list,token,roleName,description);
 }
 class _MyHomePageState extends State<ChildModule> {
   var permissionList;
-  String token;
+  List<Map> roles=[];
+  List<permission> permissions=[];
+  String token,roleName,description;
 
-  _MyHomePageState(this.permissionList, this.token);
+  _MyHomePageState(this.permissionList, this.token,this.roleName,this.description);
 
   int selected_value_id;
   bool readVal = false;
@@ -23,8 +29,7 @@ class _MyHomePageState extends State<ChildModule> {
   bool deleteVal = false;
   bool updateVal = false;
   bool listVal = false;
-  var select_value;
-  var module_list;
+
 
   Widget checkbox(String title, bool boolValue) {
     return Column(
@@ -91,7 +96,38 @@ class _MyHomePageState extends State<ChildModule> {
                   ],
                 ),
               ),
+             SizedBox(
+               height: 20,
+             ),
+             raisedButton().intelog_button("Save", Colors.amberAccent, Colors.amber[400], Colors.white, context, () {
+               print(permissionList);
 
+                  if(readVal == true){
+                    permissions.add(permission(name: 'Read',select: true));
+                  }else if(writeVal == true){
+                    permissions.add(permission(name: 'Create',select: true));
+                  }else if(updateVal == true){
+                    permissions.add(permission(name: 'Update',select: true));
+                  }
+                  else if(writeVal == true){
+                    permissions.add(permission(name: 'Delete',select: true));
+                  }
+                  else if(writeVal == true){
+                    permissions.add(permission(name: 'List',select: true));
+                  }
+
+
+//                            permissions.add(permission(name: 'Create',select: true));
+//                            permissions.add(permission(name: 'Delete',select: true));
+                            roles.add(modules(id: permissionList['module_id'],pid: permissionList['child_mod_id'],select: true,permissions: permissions).toJson());
+
+                             networks_helper.addRoles(token,roleName, description, roles).then((response){
+
+                               print(response);
+                               print("object");
+                             });
+
+             })
             ],
           ),
         )

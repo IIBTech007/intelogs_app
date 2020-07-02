@@ -71,9 +71,10 @@ class _skills_group_details extends State<departmentDetails>{
                   networks_helper.deleteSkills(token, specificDepartments['comp_dept_id']).then((value) {
                     if(value == true){
                       flushBar().flushbar("Skill", "Deleted", 4, context);
+                      Navigator.of(context).pop();
                     }
                     else{
-                      flushBar().flushbar("Skill ", value, 4, context);
+                      flushBar().flushbar("Skill ", "Not Deleted", 4, context);
                     }
                   });
                 },
