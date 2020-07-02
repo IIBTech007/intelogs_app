@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:intelogsapp/WelcomeScreen/welcome_screen.dart';
+import 'package:intelogsapp/intellogs_assets/asset_group/assets_group_details.dart';
 import 'LoginScreen.dart';
 import 'organization/SkillGroup/skillsGroup.dart';
 import 'organization/roles/addPermission.dart';
+import 'organization/section/addSections.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
           fontFamily: "Montserrat",
           //canvasColor: Colors.white
       ),
-      home: WelcomeScreen(),
+      home: AddSections('jP1RYdAj'),
      // LoginScreen()
     );
   }
