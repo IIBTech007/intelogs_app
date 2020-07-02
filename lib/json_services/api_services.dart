@@ -387,6 +387,8 @@ class networks_helper{
       print(e);
     }
   }
+  /// sections
+
   static Future<String> sectionList(String token) async{
 
     String url = BaseUrl+'index.php/structure/?auth='+token+'&op=show-sections';
@@ -561,6 +563,23 @@ class networks_helper{
   static Future<String> positionList(String token) async{
 
     String url = BaseUrl+'index.php/structure/?auth='+token+'&op=show_Positions';
+    try {
+      Response responseDio = await Dio().get(url,);
+      print(responseDio);
+      if(responseDio.statusCode== 200) {
+        return responseDio.data;
+      }
+      else{
+        return null;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<String> sections_incharge_dropdown(String token) async{
+
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=get_all_section_incharge';
     try {
       Response responseDio = await Dio().get(url,);
       print(responseDio);
