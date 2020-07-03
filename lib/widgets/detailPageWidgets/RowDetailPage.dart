@@ -25,13 +25,15 @@ class detailPageRowWidget {
                 color: Colors.grey.shade300
             ),
 
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(title, style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 15
-              ),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(title, style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 15
+                ),
+                ),
               ),
             ),
           ),
@@ -47,13 +49,15 @@ class detailPageRowWidget {
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.grey.shade300
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(content!=null?content:"", style: TextStyle(
-                //fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 15
-              ),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(content!=null?content:"", style: TextStyle(
+                  //fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 15
+                ),
+                ),
               ),
             ),
           ),

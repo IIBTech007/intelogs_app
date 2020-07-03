@@ -493,7 +493,9 @@ class networks_helper{
 
       });
       var responsedio = await dio.post(url, data: formData,);
-      print(role_permissions[0]['permissions'][0].toJson());
+
+        print(role_permissions[0]['permissions'][1].toJson());
+
       return responsedio.data;
 
       if (responsedio.statusCode == 200) {
@@ -504,7 +506,7 @@ class networks_helper{
     }
   }
   static Future<String> specificRoles(String token,String id) async{
-    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=get_SpecificRole';
+    String url = BaseUrl+'index.php/module/?auth='+token+'&op=get_SpecificRole';
     try {
       var dio = Dio();
       FormData formData = new FormData.fromMap({
@@ -521,7 +523,7 @@ class networks_helper{
     }
   }
   static Future<String> deleterole(String token,String id) async{
-    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=deleteDepartment';
+    String url = BaseUrl+'index.php/module/?auth='+token+'&op=delete_Roles';
     try {
       var dio = Dio();
       FormData formData = new FormData.fromMap({
@@ -537,15 +539,15 @@ class networks_helper{
       print(e);
     }
   }
-  static Future<String> editRole(String token,String id,String name,String description,String manager) async{
-    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=updateDepartment';
+  static Future<String> editRole(String token,String id,String name,String description,List<Map> role_permissions) async{
+    String url = BaseUrl+'index.php/module/?auth='+token+'&op=update_Roles';
     try {
       var dio = Dio();
       FormData formData = new FormData.fromMap({
-        'department_id': id,
-        'department_name': name,
-        'department_description': description,
-        'department_manager':manager,
+        'role_id':id,
+        'role_name': name,
+        'role_description': description,
+        'role_permissions': role_permissions,
       });
       var responsedio = await dio.post(url, data: formData,);
       return responsedio.data;

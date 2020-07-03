@@ -8,6 +8,8 @@ import 'package:intelogsapp/widgets/flushbar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'detailsMainPage.dart';
+
 
 class rolePage extends StatefulWidget{
   String token;
@@ -87,7 +89,7 @@ class _Profile_Page_State extends State<rolePage>{
                 trailing: Icon(Icons.arrow_right),
                 //leading: Image.asset("Assets/horses_icon.png"),
                 onTap: ()async{
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => SkillsGroupDetails("jP1RYdAj",rolesList[index])),);
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => DetailMainPage(token,rolesList[index])),);
                 },
               ),
               Divider(),

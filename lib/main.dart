@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           fontFamily: "Montserrat",
           //canvasColor: Colors.white
       ),
-      home: AddSections('jP1RYdAj'),
+      home: WelcomeScreen(),
      // LoginScreen()
     );
   }

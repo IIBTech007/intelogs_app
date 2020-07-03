@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intelogsapp/networks/organizationNetworks.dart';
 import 'package:intelogsapp/organization/roles/add_roles.dart';
+import 'package:intelogsapp/organization/roles/editPermission.dart';
 import 'package:intelogsapp/utils/Utils.dart';
 import 'package:intelogsapp/widgets/flushbar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -12,26 +13,25 @@ import 'permissionSubModule.dart';
 
 
 
-class permissionPage extends StatefulWidget{
+class editPermissionListPage extends StatefulWidget{
   String token;
-  String roleName,description;
+  String roleId,roleName,description;
 
 
-  permissionPage(this.token, this.roleName,this.description);
+  editPermissionListPage(this.token,this.roleId, this.roleName,this.description);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _Profile_Page_State(token,roleName,description);
+    return _Profile_Page_State(token,roleId,roleName,description);
   }
 
 }
-class _Profile_Page_State extends State<permissionPage>{
-  int id;
+class _Profile_Page_State extends State<editPermissionListPage>{
   bool checkBoxValue = true;
   SharedPreferences prefs;
-  _Profile_Page_State (this.token,this.roleName,this.description);
-  String token,roleName,description;
+  _Profile_Page_State (this.token,this.roleId,this.roleName,this.description);
+  String token,roleId,roleName,description;
   var permissionList;
   var temp=[];
   bool readVal = false;
@@ -93,7 +93,7 @@ class _Profile_Page_State extends State<permissionPage>{
       }else
         flushBar().flushbar("Networks", "Please check your internet", 3, context);
     });
-   super.initState();
+    super.initState();
   }
 
   @override
@@ -130,7 +130,7 @@ class _Profile_Page_State extends State<permissionPage>{
                 subtitle: Text(permissionList[index]['child_mod_name']),
                 trailing: Icon(Icons.arrow_right),
                 onTap: ()async{
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => ChildModule(permissionList[index],token,roleName,description)),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => editPermissionPage(permissionList[index],token,roleId,roleName,description)),);
                 },
 //              children: <Widget>[
 //                ListTile(
@@ -192,15 +192,15 @@ class _Profile_Page_State extends State<permissionPage>{
     );
   }
   bool checkBoxById(String num){
-   bool value;
-   if(num !=null) {
-     if (num == "1") {
-       value = false;
-     }
-     else if (num == "0") {
-       value = true;
-     }
-   }
+    bool value;
+    if(num !=null) {
+      if (num == "1") {
+        value = false;
+      }
+      else if (num == "0") {
+        value = true;
+      }
+    }
     return value;
   }
 }

@@ -10,22 +10,22 @@ import 'modules.dart';
 import 'permission.dart';
 
 
-class ChildModule extends StatefulWidget {
+class editPermissionPage extends StatefulWidget {
   var list;
-  String token,roleName,description;
+  String token,roleId,roleName,description;
 
-  ChildModule(this.list, this.token,this.roleName,this.description);
+  editPermissionPage(this.list, this.token,this.roleId,this.roleName,this.description);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState(list,token,roleName,description);
+  _MyHomePageState createState() => _MyHomePageState(list,token,roleId,roleName,description);
 }
-class _MyHomePageState extends State<ChildModule> {
+class _MyHomePageState extends State<editPermissionPage> {
   var permissionList;
   List<Map> roles=[];
   List<permission> permissions=[];
-  String token,roleName,description;
+  String token,roleId,roleName,description;
 
-  _MyHomePageState(this.permissionList, this.token,this.roleName,this.description);
+  _MyHomePageState(this.permissionList, this.token,this.roleId,this.roleName,this.description);
 
   bool createtrisatValue=false,listtrisatValue,readtrisatValue=false,updatetrisatValue=false,deletetrisatValue=false;
   bool readVal = false;
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<ChildModule> {
             createtrisatValue = true;
           });
         }
-       else if (permissionList['is_read'] == 1) {
+        else if (permissionList['is_read'] == 1) {
           setState(() {
             readtrisatValue = true;
           });
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<ChildModule> {
             listtrisatValue = false;
           });
 
-      }
+        }
       });
     }
   }
@@ -111,7 +111,7 @@ class _MyHomePageState extends State<ChildModule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text("Child Module"),
           centerTitle: true,
@@ -168,59 +168,59 @@ class _MyHomePageState extends State<ChildModule> {
                   ],
                 ),
               ),
-             SizedBox(
-               height: 20,
-             ),
-             raisedButton().intelog_button("Save", Colors.amberAccent, Colors.amber[400], Colors.white, context, () {
+              SizedBox(
+                height: 20,
+              ),
+              raisedButton().intelog_button("Save", Colors.amberAccent, Colors.amber[400], Colors.white, context, () {
                 if(permissions!=null ){
                   permissions.clear();
                 }if(roles!=null){
                   roles.clear();
                 }
 
-                  if(readVal){
-                    setState(() {
-                      permissions.add(permission(name: 'Read',select: true));
-                    });
-                  }if(writeVal){
-                   setState(() {
-                     permissions.add(permission(name: 'Create',select: true));
-                   });
-                  }if(updateVal){
-                    setState(() {
-                      permissions.add(permission(name: 'Update',select: true));
-                    });
-                  }
-                  if(deleteVal == true){
-                    setState(() {
-                      permissions.add(permission(name: 'Delete',select: true));
-                    });
-                  }
-                  if(listVal == true){
-                    setState(() {
-                      permissions.add(permission(name: 'List',select: true));
-                    });
+                if(readVal){
+                  setState(() {
+                    permissions.add(permission(name: 'Read',select: true));
+                  });
+                }if(writeVal){
+                  setState(() {
+                    permissions.add(permission(name: 'Create',select: true));
+                  });
+                }if(updateVal){
+                  setState(() {
+                    permissions.add(permission(name: 'Update',select: true));
+                  });
+                }
+                if(deleteVal == true){
+                  setState(() {
+                    permissions.add(permission(name: 'Delete',select: true));
+                  });
+                }
+                if(listVal == true){
+                  setState(() {
+                    permissions.add(permission(name: 'List',select: true));
+                  });
 
-                  }
+                }
 
 
 //                            permissions.add(permission(name: 'Create',select: true));
 //                            permissions.add(permission(name: 'Delete',select: true));
-                            roles.add(modules(id: permissionList['module_id'],pid: permissionList['child_mod_id'],select: true,permissions: permissions).toJson());
+                roles.add(modules(id: permissionList['module_id'],pid: permissionList['child_mod_id'],select: true,permissions: permissions).toJson());
 
-                             networks_helper.addRoles(token,roleName, description, roles).then((response){
+                networks_helper.editRole(token,roleId,roleName, description, roles).then((response){
 
-                               print(response);
-                               print("add roles & permission response");
-                              // jsonDecode(permissions);
-                               print(readVal);
-                               print(listVal);
-                            var a = jsonEncode(roles);
+                  print(response);
+                  print("add roles & permission response");
+                  // jsonDecode(permissions);
+                  print(readVal);
+                  print(listVal);
+                  var a = jsonEncode(roles);
 
-                            print(a);
-                             });
+                  print(a);
+                });
 
-             })
+              })
             ],
           ),
         )
