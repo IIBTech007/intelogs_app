@@ -107,36 +107,36 @@ class _EditShift_State extends State<EditShift> {
                   ),
                 ),
 
-                Padding(
-                  padding: EdgeInsets.all(8),
-                  child: FormBuilderDropdown(
-                    //initialValue: "Select One",
-                    attribute: "Select Incharge",
-                    validators: [FormBuilderValidators.required()],
-                    hint: Text("- Select -",style: TextStyle(color: Colors.amber,fontWeight: FontWeight.bold)),
-                    items: incharge.map((name) => DropdownMenuItem(
-                        value: name, child: Text("$name",textScaleFactor: 1.2,style: TextStyle(color: Colors.amber,fontWeight: FontWeight.bold),)))
-                        .toList(),
-                    onChanged: (value){
-                      setState(() {
-                        selected_incharge = value;
-                        incharge_id = incharge.indexOf(value);
-                      });
-                    },
-                    style: Theme.of(context).textTheme.bodyText2,
-                    decoration: InputDecoration(labelText: "SELECT INCHARGE", labelStyle: TextStyle(
-                      color: Colors.amber.shade400,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                      //icon: FaIcon(FontAwesomeIcons.question, color: Colors.amber.shade400,) ,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(9.0),
-                          borderSide: BorderSide(color: Colors.amber.shade400, width: 3.0)
-                      ),
-                    ),
-                  ),
-                ),
+//                Padding(
+//                  padding: EdgeInsets.all(8),
+//                  child: FormBuilderDropdown(
+//                    //initialValue: "Select One",
+//                    attribute: "Select Incharge",
+//                    validators: [FormBuilderValidators.required()],
+//                    hint: Text("- Select -",style: TextStyle(color: Colors.amber,fontWeight: FontWeight.bold)),
+//                    items: incharge.map((name) => DropdownMenuItem(
+//                        value: name, child: Text("$name",textScaleFactor: 1.2,style: TextStyle(color: Colors.amber,fontWeight: FontWeight.bold),)))
+//                        .toList(),
+//                    onChanged: (value){
+//                      setState(() {
+//                        selected_incharge = value;
+//                        incharge_id = incharge.indexOf(value);
+//                      });
+//                    },
+//                    style: Theme.of(context).textTheme.bodyText2,
+//                    decoration: InputDecoration(labelText: "SELECT INCHARGE", labelStyle: TextStyle(
+//                      color: Colors.amber.shade400,
+//                      fontWeight: FontWeight.bold,
+//                      fontSize: 15,
+//                    ),
+//                      //icon: FaIcon(FontAwesomeIcons.question, color: Colors.amber.shade400,) ,
+//                      border: OutlineInputBorder(
+//                          borderRadius: BorderRadius.circular(9.0),
+//                          borderSide: BorderSide(color: Colors.amber.shade400, width: 3.0)
+//                      ),
+//                    ),
+//                  ),
+//                ),
                 Padding(
                   padding: EdgeInsets.all(8),
                   child: FormBuilderTextField(
