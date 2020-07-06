@@ -407,6 +407,8 @@ class networks_helper{
     }
   }
 
+  /// Shifts
+
   static Future<String> shiftsList(String token) async{
 
     String url = BaseUrl+'index.php/structure/?auth='+token+'&op=get_shifts';
@@ -424,6 +426,228 @@ class networks_helper{
       print(e);
     }
   }
+
+  static Future<String> addShifts(String token,String name,String startTime,String endTime) async{
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=addShifts';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'shift_name': name,
+        'shift_start_time': startTime,
+        'shift_end_time': endTime,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      return responsedio.data;
+
+      if (responsedio.statusCode == 200) {
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+
+  ///Shifts Category
+
+
+  static Future<String> shiftGategoryList(String token) async{
+
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=shift_categories';
+    try {
+      Response responseDio = await Dio().get(url,);
+      if(responseDio.statusCode== 200) {
+        return responseDio.data;
+      }
+      else{
+        return null;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<String> addShiftsGategory(String token,String name,String dutyhour) async{
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=add_shift_category';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'shift_category_name': name,
+        //'shift_cate_code': startTime,
+        'shift_duty_hours': dutyhour,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      return responsedio.data;
+
+      if (responsedio.statusCode == 200) {
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<String> editShiftsGategory(String token,String id,String name,String dutyhour) async{
+    String url = BaseUrl+'index.php/section/?auth='+token+'&op=edit_section_category';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'shift_cate_id': id,
+        'shift_category_name': name,
+        'shift_duty_hours': dutyhour,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      return responsedio.data;
+
+      if (responsedio.statusCode == 200) {
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+
+
+  static Future<String> deleteShiftsGategory(String token,String id) async{
+    String url = BaseUrl+'index.php/section/?auth='+token+'&op=delete_shift_category';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'category_id': id,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      return responsedio.data;
+    }catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<String> detailsShiftsGategory(String token,String id) async{
+    String url = BaseUrl+'index.php/section/?auth='+token+'&op=category_details';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'category_id': id,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      return responsedio.data;
+    }catch (e) {
+      print(e);
+    }
+  }
+  static Future<String> getShiftIncharge(String token) async{
+
+    String url = BaseUrl+'index.php/section/?auth='+token+'&op=get_all_shift_incharge';
+    try {
+      Response responseDio = await Dio().get(url,);
+      if(responseDio.statusCode== 200) {
+        return responseDio.data;
+      }
+      else{
+        return null;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<String> assignShiftIncharge(String token,String inchargeId,String shift_mapping_id,String department_id,String last_incharge_id) async{
+    String url = BaseUrl+'index.php/section/?auth='+token+'&op=assign_shift_incharge';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'incharge_id': inchargeId,
+        'shift_mapping_id': shift_mapping_id,
+        'department_id': department_id,
+        'last_incharge_id': last_incharge_id,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+
+
+      if (responsedio.statusCode == 200) {
+        return responsedio.data;
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<String> mapShiftInCategory(String token,String categoryId,List shifts) async{
+    String url = BaseUrl+'index.php/section/?auth='+token+'&op=mapp_shifts_in_category';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'category_id': categoryId,
+        'shifts': shifts,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+
+
+      if (responsedio.statusCode == 200) {
+        return responsedio.data;
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+  static Future<String> shiftFilter(String token,List shifts) async{
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=shift-filter';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+
+        'shift_ids': shifts,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+
+
+      if (responsedio.statusCode == 200) {
+        return responsedio.data;
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+  static Future<String> removeShiftsFromCategory(String token,String shift_map_id) async{
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=remove_shift_from_category';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+
+        'sec_shift_map_id': shift_map_id,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+
+
+      if (responsedio.statusCode == 200) {
+        return responsedio.data;
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+  static Future<String> assignEmployeeToShift(String token,String shift_id,List employees,String sectionId) async{
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=sassign-employee-to-shift';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'shift_id': shift_id,
+        'employees': employees,
+        'SectionId': sectionId,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      if (responsedio.statusCode == 200) {
+        return responsedio.data;
+      } else
+        return null;
+    }catch (e) {
+      print(e);
+    }
+  }
+
 
   /// Roles
 
