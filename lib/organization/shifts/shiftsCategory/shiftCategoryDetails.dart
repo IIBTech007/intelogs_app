@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:intelogsapp/intellogs_assets/asset_group/editAssetGroup.dart';
 import 'package:intelogsapp/widgets/detailPageWidgets/RowDetailPage.dart';
 import 'package:intelogsapp/widgets/detailPageWidgets/detailPageDescription.dart';
 
 
-class AssetsGeneralInformation extends StatefulWidget{
+class ShiftCategoryDetails extends StatefulWidget{
   String token;
-  var specificAssets;
-  AssetsGeneralInformation(this.token,this.specificAssets);
+  var specificCategory;
+  ShiftCategoryDetails(this.token,this.specificCategory);
 
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _AssetsGeneralInformation_State(token,specificAssets);
+    return _ShiftCategoryDetails_State(token,specificCategory);
   }
 
 }
 
-class _AssetsGeneralInformation_State extends State<AssetsGeneralInformation> {
+class _ShiftCategoryDetails_State extends State<ShiftCategoryDetails> {
   String token;
-  var specificAssets;
+  var specificCategory;
   var specNew;
-  _AssetsGeneralInformation_State(this.token, this.specificAssets);
+  _ShiftCategoryDetails_State(this.token, this.specificCategory);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class _AssetsGeneralInformation_State extends State<AssetsGeneralInformation> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber.shade400,
-        title: Text("Assets - General Information", style: TextStyle(fontFamily: 'Montserrat', fontSize: 25,color: Colors.white),),
+        title: Text("Shifts Category Details", style: TextStyle(fontFamily: 'Montserrat', fontSize: 25,color: Colors.white),),
         iconTheme: IconThemeData(color: Colors.white,),
 
 //        centerTitle: true,
@@ -54,14 +55,7 @@ class _AssetsGeneralInformation_State extends State<AssetsGeneralInformation> {
           ),
         ],
       ),
-
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber[600],
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => EditAssetGroup(token,specificAssets)),);
-        },
-        child: Icon(Icons.edit),
-      ),
+      floatingActionButton: buildSpeedDial(),
       body: Container(
         padding: EdgeInsets.only(left: 15, right: 15, top: 15 ),
         height: MediaQuery.of(context).size.height,
@@ -74,41 +68,54 @@ class _AssetsGeneralInformation_State extends State<AssetsGeneralInformation> {
 //          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             detailPageRowWidget().rowdetailpage(
-                "Title: ",
-                "Intellogs- Web",
+                "Name: ",
+                "Shift Category",
                 //'specificAssets['skill_group_name']',
                 context),
             SizedBox(height: 5),
             detailPageRowWidget().rowdetailpage(
-                "Code/ID: ",
-                "A0001",
+                "Cartegory ID: ",
+                "SC0001",
                 //specificAssets['skill_group_code'],
                 context),
             SizedBox(height: 5),
             detailPageRowWidget().rowdetailpage(
-                "Department: ",
-                "Intellogs",
+                "Duty Hours: ",
+                "30",
                 //specificAssets['skill_group_code'],
                 context),
-            SizedBox(height: 5),
-            detailPageRowWidget().rowdetailpage(
-                "Parent Group: ",
-                "Lorem-Ipsum",
-                //specificAssets['skill_group_code'],
-                context),
-            SizedBox(height: 5),
-//            SizedBox(height: 5),
-//            detailPageRowWidget().rowdetailpage("Name: ", "content", context),
-            SizedBox(height: 5),
-            detailPageDesciption().detailPagedesciption(
-                "Description",
-                "This is decription",
-                //specificAssets['skill_group_description'],
-                context
-            )
           ],
         ),
       ),
+    );
+  }
+  SpeedDial buildSpeedDial() {
+    return SpeedDial(
+      animatedIcon: AnimatedIcons.menu_close,
+      animatedIconTheme: IconThemeData(size: 22.0),
+      // child: Icon(Icons.add),
+      onOpen: () => print('OPENING DIAL'),
+      onClose: () => print('DIAL CLOSED'),
+      //visible: dialVisible,
+      curve: Curves.bounceIn,
+      children: [
+        SpeedDialChild(
+          child: Icon(Icons.add, color: Colors.white),
+          backgroundColor: Colors.amber.shade400,
+          //onTap: () => print('FIRST CHILD'),
+          label: 'Add',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.amber.shade400,
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.brush, color: Colors.white),
+          backgroundColor: Colors.amber.shade400,
+          //onTap: () => print('SECOND CHILD'),
+          label: 'Edit',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.amber.shade400,
+        ),
+      ],
     );
   }
 }

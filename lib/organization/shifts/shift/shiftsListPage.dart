@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intelogsapp/networks/organizationNetworks.dart';
+import 'file:///C:/Users/WA/AndroidStudioProjects/intelogs_app/lib/organization/shifts/shift/addShifts.dart';
+import 'file:///C:/Users/WA/AndroidStudioProjects/intelogs_app/lib/organization/shifts/shift/shiftDetails.dart';
 import 'package:intelogsapp/utils/Utils.dart';
 import 'package:intelogsapp/widgets/flushbar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -72,7 +74,7 @@ class _Profile_Page_State extends State<shiftPage>{
         ),floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),backgroundColor: Colors.amber[600],
           onPressed: () {
-
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AddShift(token)),);
           },
         ),
 
@@ -86,7 +88,7 @@ class _Profile_Page_State extends State<shiftPage>{
                 trailing: Icon(Icons.arrow_right),
                 //leading: Image.asset("Assets/horses_icon.png"),
                 onTap: ()async{
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => SkillsGroupDetails("jP1RYdAj",shiftList[index])),);
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => ShiftDetails("jP1RYdAj",shiftList[index])),);
                 },
               ),
               Divider(),
