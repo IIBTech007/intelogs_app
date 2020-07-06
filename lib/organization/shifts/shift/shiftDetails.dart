@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:intelogsapp/intellogs_assets/asset_group/editAssetGroup.dart';
-import 'file:///C:/Users/WA/AndroidStudioProjects/intelogs_app/lib/organization/shifts/shift/editShifts.dart';
 import 'package:intelogsapp/widgets/detailPageWidgets/RowDetailPage.dart';
 import 'package:intelogsapp/widgets/detailPageWidgets/detailPageDescription.dart';
+
+import 'editShifts.dart';
 
 
 class ShiftDetails extends StatefulWidget{

@@ -6,8 +6,8 @@ import 'package:intelogsapp/organization/department/departmentListPage.dart';
 import 'package:intelogsapp/organization/position/pasitionListPage.dart';
 import 'package:intelogsapp/organization/roles/rolesListPage.dart';
 import 'package:intelogsapp/organization/section/sectionListPage.dart';
+import 'package:intelogsapp/organization/shifts/shift/shiftsListPage.dart';
 import 'package:intelogsapp/organization/shifts/shiftsCategory/shiftsCategoryList.dart';
-import 'file:///C:/Users/WA/AndroidStudioProjects/intelogs_app/lib/organization/shifts/shift/shiftsListPage.dart';
 import 'package:intelogsapp/widgets/gridBox.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,9 +23,7 @@ class organizationalHomePage extends StatelessWidget {
           centerTitle: true,
         ),
         body: Center(
-
           child: GridView.count(
-
             primary: false,
             padding: const EdgeInsets.all(12),
             crossAxisSpacing: 25,
@@ -38,7 +36,6 @@ class organizationalHomePage extends StatelessWidget {
                     onTap: () async{
                       prefs= await SharedPreferences.getInstance();
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>skillsGroup(prefs.getString("token"))));
-
                     },
                     child: Container(
                       padding: const EdgeInsets.all(8),
@@ -98,15 +95,7 @@ class organizationalHomePage extends StatelessWidget {
                 print("functions working");
                 prefs= await SharedPreferences.getInstance();
                Navigator.push(context, MaterialPageRoute(builder: (context)=>ShiftsCategoryList(prefs.getString("token"))));
-
               }),
-
-
-
-
-
-
-
             ],
           ),
         ),

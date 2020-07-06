@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intelogsapp/networks/organizationNetworks.dart';
-import 'file:///C:/Users/WA/AndroidStudioProjects/intelogs_app/lib/organization/shifts/shift/addShifts.dart';
-import 'file:///C:/Users/WA/AndroidStudioProjects/intelogs_app/lib/organization/shifts/shift/shiftDetails.dart';
 import 'package:intelogsapp/utils/Utils.dart';
 import 'package:intelogsapp/widgets/flushbar.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'addShifts.dart';
+import 'shiftDetails.dart';
 
 
 class shiftPage extends StatefulWidget{
