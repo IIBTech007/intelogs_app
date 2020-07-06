@@ -92,6 +92,12 @@ class _ShiftDetails_State extends State<ShiftDetails> {
                 "12:00 AM",
                 //specificAssets['skill_group_code'],
                 context),
+            SizedBox(height: 5),
+            detailPageRowWidget().rowdetailpage(
+                "End Time: ",
+                "12:00 PM",
+                //specificAssets['skill_group_code'],
+                context),
           ],
         ),
       ),
