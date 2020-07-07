@@ -6,6 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intelogsapp/utils/Utils.dart';
 import 'package:intelogsapp/networks/organizationNetworks.dart';
+import 'package:intelogsapp/widgets/flushbar.dart';
 
 
 class AddShift extends StatefulWidget{
@@ -32,6 +33,7 @@ class _AddShift_State extends State<AddShift> {
   String selected_incharge;
   int incharge_id;
   var now = DateTime.now();
+  String starttime,endtime;
   //Duration initialtimer = new Duration();
 
 
@@ -65,7 +67,7 @@ class _AddShift_State extends State<AddShift> {
 
   @override
   Widget build(BuildContext context) {
-    var today= new DateTime(now.year, now.month, now.day);
+   // var today= new DateTime(now.year, now.month, now.day);
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -181,11 +183,54 @@ class _AddShift_State extends State<AddShift> {
 //                   },
 //                 )
                   CupertinoDatePicker(
-                    minimumDate: today,
+                   // minimumDate: today,
                     minuteInterval: 1,
                     mode: CupertinoDatePickerMode.time,
+
                     onDateTimeChanged: (DateTime time) {
                       print("dateTime: ${time}");
+                      setState(() {
+                        starttime = time.toString().substring(10,16);
+
+                      });
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 285),
+                  child: Text("END TIME", style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.amber.shade400
+                  ),),
+                ),
+                Container(
+                  padding: EdgeInsets.all(8),
+                  height: 150,
+                  width: MediaQuery.of(context).size.width,
+                  child:
+//                 CupertinoTimerPicker(
+//                   mode: CupertinoTimerPickerMode.hms,
+//                   minuteInterval: 1,
+//                   secondInterval: 1,
+//                   initialTimerDuration: initialtimer,
+//                   onTimerDurationChanged: (Duration changedtimer) {
+//                     setState(() {
+//                       initialtimer = changedtimer;
+//                     });
+//                   },
+//                 )
+                  CupertinoDatePicker(
+                   // minimumDate: today,
+                    minuteInterval: 1,
+                    use24hFormat: false,
+
+                    mode: CupertinoDatePickerMode.time,
+                    onDateTimeChanged: (DateTime time) {
+                      setState(() {
+                        endtime = time.toString().substring(10,16);
+                      });
+//                      print("dateTime: ${end1}");
                     },
                   ),
                 ),
@@ -213,19 +258,25 @@ class _AddShift_State extends State<AddShift> {
                             color: Colors.amber.shade400,
                             fontSize: 20),
                       ),
-//                    onPressed: () {
-//                      if(_fbKey.currentState.validate())
-//                        networks_helper.addSkillsGroup(token, skill_group_name.text, description.text).then((value){
-//                          var res = jsonDecode(value);
-//                          if(res['error']== false){
-//                            flushBar().flushbar("Add SkillGroup", res['message'], 3, context);
-//                            Navigator.pop(context);
-//                          }
-//                          else {
-//                            flushBar().flushbar("Add SkillGroup error", res['message'], 3, context);
-//                          }
-//                        });
-//                    },
+                    onPressed: () {
+                      if(_fbKey.currentState.validate()) {
+                        print("press btn");
+                        networks_helper.addShifts(token, name.text, starttime, endtime).then((value) {
+                          var res = jsonDecode(value);
+                          print(res);
+                          if (res['error'] == false) {
+                            print("scuccess");
+                            flushBar().flushbar("Add SkillGroup", res['message'], 3, context);
+                            Navigator.pop(context);
+                          }
+                          else {
+                            print("error");
+                            flushBar().flushbar(
+                                "Add Shifts Error", res['message'], 3, context);
+                          }
+                        });
+                      }
+                    },
                     ),
                     height: 50,
                   ),

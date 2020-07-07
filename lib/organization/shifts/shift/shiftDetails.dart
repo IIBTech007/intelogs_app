@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:intelogsapp/intellogs_assets/asset_group/editAssetGroup.dart';
+import 'package:intelogsapp/networks/organizationNetworks.dart';
 import 'package:intelogsapp/widgets/detailPageWidgets/RowDetailPage.dart';
-import 'package:intelogsapp/widgets/detailPageWidgets/detailPageDescription.dart';
-
 import 'editShifts.dart';
 
 
@@ -24,8 +22,8 @@ class ShiftDetails extends StatefulWidget{
 class _ShiftDetails_State extends State<ShiftDetails> {
   String token;
   var specificShift;
-  var specNew;
   _ShiftDetails_State(this.token, this.specificShift);
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +40,7 @@ class _ShiftDetails_State extends State<ShiftDetails> {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
 //                onTap: () {
+//
 //                  networks_helper.deleteSkillsGroup(token, specificSkillGroup['skill_group_id']).then((value) {
 //                    var res=jsonDecode(value);
 //                    if(res == true){
@@ -71,31 +70,26 @@ class _ShiftDetails_State extends State<ShiftDetails> {
           children: <Widget>[
             detailPageRowWidget().rowdetailpage(
                 "Name: ",
-                "Shift Category",
+                specificShift['shift_name']!=null?specificShift['shift_name']:"",
                 //'specificAssets['skill_group_name']',
                 context),
             SizedBox(height: 5),
             detailPageRowWidget().rowdetailpage(
-                "Cartegory ID: ",
-                "SD0001",
-                //specificAssets['skill_group_code'],
-                context),
-            SizedBox(height: 5),
-            detailPageRowWidget().rowdetailpage(
                 "Duty Hours: ",
-                "30",
+                specificShift['shift_duty_hours']!=null?specificShift['shift_duty_hours']:"",
                 //specificAssets['skill_group_code'],
                 context),
             SizedBox(height: 5),
             detailPageRowWidget().rowdetailpage(
                 "Start Time: ",
-                "12:00 AM",
+                specificShift['shift_start_time']!=null?specificShift['shift_start_time']:"",
+
                 //specificAssets['skill_group_code'],
                 context),
             SizedBox(height: 5),
             detailPageRowWidget().rowdetailpage(
                 "End Time: ",
-                "12:00 PM",
+                specificShift['shift_end_time']!=null?specificShift['shift_end_time']:"",
                 //specificAssets['skill_group_code'],
                 context),
           ],
@@ -126,7 +120,7 @@ class _ShiftDetails_State extends State<ShiftDetails> {
           child: Icon(Icons.brush, color: Colors.white),
           backgroundColor: Colors.amber.shade400,
           onTap: ()async{
-            Navigator.push(context, MaterialPageRoute(builder: (context) => EditShift("jP1RYdAj",specificShift['i'])),);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => EditShift(token,specificShift)),);
           },
           //onTap: () => print('SECOND CHILD'),
           label: 'Edit',

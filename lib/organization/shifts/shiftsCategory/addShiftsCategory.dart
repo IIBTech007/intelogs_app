@@ -1,13 +1,10 @@
-import 'package:flutter/material.dart';
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intelogsapp/networks/organizationNetworks.dart';
-import 'package:intelogsapp/utils/Utils.dart';
 import 'package:intelogsapp/widgets/flushbar.dart';
+
 
 class AddShiftsCategory extends StatefulWidget{
   String token;
@@ -30,7 +27,9 @@ class _AddShiftsCategory extends State<AddShiftsCategory> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey();
   TextEditingController category_name;
   var shifts_category_response;
-  List<String> shift_duty_hours=[];
+  List<String> shift_duty_hours=["1 hour","2 hour","3 hour","4 hour","5 hour","6 hour","7 hour","8 hour","9 hour","10 hour",
+    "11 hour","12 hour","13 hour","14 hour","15 hour","16 hour","17 hour","18 hour","18 hour","19 hour",
+    "20 hour","21 hour","22 hour","23 hour","24 hour",];
   String selected_shift_duty_hours;
   int sshift_duty_hours_id;
 
@@ -123,7 +122,8 @@ class _AddShiftsCategory extends State<AddShiftsCategory> {
                   onChanged: (value){
                     setState(() {
                       selected_shift_duty_hours = value;
-                      sshift_duty_hours_id = shift_duty_hours.indexOf(value);
+                      sshift_duty_hours_id = shift_duty_hours.indexOf(value)+1;
+                      print(sshift_duty_hours_id);
                     });
                   },
                   style: Theme.of(context).textTheme.bodyText2,
@@ -238,19 +238,23 @@ class _AddShiftsCategory extends State<AddShiftsCategory> {
                           color: Colors.amber.shade400,
                           fontSize: 20),
                     ),
-//                    onPressed: () {
-//                      if(_fbKey.currentState.validate())
-//                        networks_helper.addSkillsGroup(token, skill_group_name.text, description.text).then((value){
-//                          var res = jsonDecode(value);
-//                          if(res['error']== false){
-//                            flushBar().flushbar("Add SkillGroup", res['message'], 3, context);
-//                            Navigator.pop(context);
-//                          }
-//                          else {
-//                            flushBar().flushbar("Add SkillGroup error", res['message'], 3, context);
-//                          }
-//                        });
-//                    },
+                    onPressed: () {
+                      if(_fbKey.currentState.validate())
+                        networks_helper.addShiftsGategory(token, category_name.text, sshift_duty_hours_id.toString())
+                            .then((value){
+                              print(value);
+                          var res = jsonDecode(value);
+                          if(res){
+                            print("Success");
+                            flushBar().flushbar("Add SkillGroup", "Successfull", 3, context);
+                            Navigator.pop(context);
+                          }
+                          else {
+                            print("error");
+                            flushBar().flushbar("Add SkillGroup error", "!", 3, context);
+                          }
+                        });
+                    },
                   ),
                   height: 50,
                 ),

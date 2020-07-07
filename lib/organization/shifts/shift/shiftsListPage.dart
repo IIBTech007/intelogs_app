@@ -89,7 +89,7 @@ class _Profile_Page_State extends State<shiftPage>{
                 trailing: Icon(Icons.arrow_right),
                 //leading: Image.asset("Assets/horses_icon.png"),
                 onTap: ()async{
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => ShiftDetails("jP1RYdAj",shiftList[index])),);
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => ShiftDetails(token,shiftList[index])),);
                 },
               ),
               Divider(),

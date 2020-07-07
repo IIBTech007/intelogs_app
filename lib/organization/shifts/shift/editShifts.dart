@@ -42,6 +42,10 @@ class _EditShift_State extends State<EditShift> {
     super.initState();
     name = TextEditingController();
     duty_hours = TextEditingController();
+    setState(() {
+      name.text = specificShift['shift_name'];
+      duty_hours.text = specificShift['shift_duty_hours'];
+    });
     Utils.check_connectivity().then((result){
       if(result){
         networks_helper.sections_incharge_dropdown(token).then((response){
@@ -187,7 +191,7 @@ class _EditShift_State extends State<EditShift> {
                     minuteInterval: 1,
                     mode: CupertinoDatePickerMode.time,
                     onDateTimeChanged: (DateTime time) {
-                      print("dateTime: ${time}");
+                      print("dateTime: $time");
                     },
                   ),
                 ),

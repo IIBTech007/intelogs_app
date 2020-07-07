@@ -13,23 +13,23 @@ import 'shiftCategoryMainPage.dart';
 
 
 
-class ShiftsCategoryList extends StatefulWidget{
+class assignShiftToCategory extends StatefulWidget{
   String token;
 
 
-  ShiftsCategoryList (this.token);
+  assignShiftToCategory (this.token);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _ShiftsCategoryList_State(token);
+    return _assignShiftToCategory_State(token);
   }
 
 }
-class _ShiftsCategoryList_State extends State<ShiftsCategoryList>{
+class _assignShiftToCategory_State extends State<assignShiftToCategory>{
   int id;
   SharedPreferences prefs;
-  _ShiftsCategoryList_State (this.token);
+  _assignShiftToCategory_State (this.token);
 
   String token;
   var categoryList;
@@ -127,7 +127,7 @@ class _ShiftsCategoryList_State extends State<ShiftsCategoryList>{
                   trailing: Icon(Icons.arrow_right),
                   //leading: Image.asset("Assets/horses_icon.png"),
                   onTap: ()async{
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => shiftDetailMainPage(token,categoryList[index])),);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => shiftDetailMainPage(token,categoryList[index])),);
                   },
                 ),
                 secondaryActions: <Widget>[

@@ -449,8 +449,27 @@ class networks_helper{
 
   ///Shifts Category
 
-
   static Future<String> shiftGategoryList(String token) async{
+
+    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=get_shift_categories';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        "shift_categories_ids":'',
+      });
+      Response responseDio = await Dio().post(url,data: formData);
+      if(responseDio.statusCode== 200) {
+        return responseDio.data;
+      }
+      else{
+        return null;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<String> shiftGategories(String token) async{
 
     String url = BaseUrl+'index.php/structure/?auth='+token+'&op=shift_categories';
     try {
@@ -467,7 +486,7 @@ class networks_helper{
   }
 
   static Future<String> addShiftsGategory(String token,String name,String dutyhour) async{
-    String url = BaseUrl+'index.php/structure/?auth='+token+'&op=add_shift_category';
+    String url = BaseUrl+'index.php/section/?auth='+token+'&op=add_shift_category';
     try {
       var dio = Dio();
       FormData formData = new FormData.fromMap({
@@ -505,8 +524,19 @@ class networks_helper{
       print(e);
     }
   }
-
-
+  static Future<String> detailShiftsGategory(String token,String id) async{
+    String url = BaseUrl+'index.php/section/?auth='+token+'&op=category_details';
+    try {
+      var dio = Dio();
+      FormData formData = new FormData.fromMap({
+        'category_id': id,
+      });
+      var responsedio = await dio.post(url, data: formData,);
+      return responsedio.data;
+    }catch (e) {
+      print(e);
+    }
+  }
   static Future<String> deleteShiftsGategory(String token,String id) async{
     String url = BaseUrl+'index.php/section/?auth='+token+'&op=delete_shift_category';
     try {
