@@ -40,6 +40,8 @@ dependencies:
   custom_switch_button: ^0.5.0
   flutter_speed_dial: ^1.2.5
   f_datetimerangepicker: ^0.1.3
+  google_fonts: ^1.1.0
+  badges: ^1.1.1
 
 dev_dependencies:
   flutter_test:

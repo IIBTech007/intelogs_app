@@ -1,8 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intelogsapp/intellogs_assets/asset_group/editAssetGroup.dart';
 import 'package:intelogsapp/organization/section/editSections.dart';
+import 'package:intelogsapp/organization/section/sectionNetwork/sectionNetwork.dart';
+import 'package:intelogsapp/utils/Utils.dart';
 import 'package:intelogsapp/widgets/detailPageWidgets/RowDetailPage.dart';
 import 'package:intelogsapp/widgets/detailPageWidgets/detailPageDescription.dart';
+import 'package:intelogsapp/widgets/flushbar.dart';
+import 'package:progress_dialog/progress_dialog.dart';
+import 'package:intelogsapp/networks/organizationNetworks.dart';
 
 
 class SectionDetails extends StatefulWidget{
@@ -24,6 +31,31 @@ class _SectionDetails_State extends State<SectionDetails> {
   var specificSection;
   var specNew;
   _SectionDetails_State(this.token, this.specificSection);
+
+
+  @override
+  void initState() {
+    Utils.check_connectivity().then((result){
+      if(result) {
+        ProgressDialog pd = ProgressDialog(
+            context, isDismissible: true, type: ProgressDialogType.Normal);
+        pd.show();
+        sections_network.specificSection(token,specificSection['section_id']).then((response) {
+          pd.hide();
+          setState(() {
+            //print(response);
+
+            var loadlist = json.decode(response);
+            specNew = loadlist['section_detail'];
+            print(specNew);
+
+          });
+        });
+      }else
+        flushBar().flushbar("Networks", "Please check your internet", 3, context);
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,25 +108,24 @@ class _SectionDetails_State extends State<SectionDetails> {
           children: <Widget>[
             detailPageRowWidget().rowdetailpage(
                 "Department: ",
-                "Intellogs",
-                //'specificSection['skill_group_name']',
+                specNew[0]['comp_dept_name'],
                 context),
             SizedBox(height: 5),
             detailPageRowWidget().rowdetailpage(
                 "Section Name: ",
-                "Intelogs Web",
+                specNew[0]['section_name'],
                 //specificSection['skill_group_code'],
                 context),
             SizedBox(height: 5),
             detailPageRowWidget().rowdetailpage(
                 "Section Incharge: ",
-                "Sophia",
+                specNew[0]['emp_name'],
                 //specificSection['skill_group_code'],
                 context),
             SizedBox(height: 5),
             detailPageRowWidget().rowdetailpage(
                 "Section Code: ",
-                "DS0001",
+                specNew[0]['section_code'],
                 //specificSection['skill_group_code'],
                 context),
             SizedBox(height: 5),

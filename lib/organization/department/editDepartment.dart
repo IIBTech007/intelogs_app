@@ -187,7 +187,7 @@ class update_skill_state  extends State<editDepartment> {
                                   print(selected_manager);
                                   ProgressDialog pd = ProgressDialog(context, type: ProgressDialogType.Normal);
                                   pd.show();
-                                  networks_helper.editDepartment(token, specificDepartment['skill_id'], name.text, description.text,manager_id.toString())
+                                  networks_helper.editDepartment(token, specificDepartment['comp_dept_id'], name.text, description.text,manager_id.toString())
                                       .then((value) {
                                     pd.hide();
                                     if (value == true) {

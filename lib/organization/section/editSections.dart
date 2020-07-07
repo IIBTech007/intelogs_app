@@ -6,7 +6,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intelogsapp/networks/organizationNetworks.dart';
 import 'package:intelogsapp/organization/section/addEmployeeToSection.dart';
+import 'package:intelogsapp/organization/section/sectionNetwork/sectionNetwork.dart';
 import 'package:intelogsapp/utils/Utils.dart';
+import 'package:intelogsapp/widgets/flushbar.dart';
 
 
 class EditSections extends StatefulWidget{
@@ -42,26 +44,42 @@ class _EditSections_State extends State<EditSections> {
     // TODO: implement initState
     super.initState();
     name = TextEditingController();
+    setState(() {
+      name.text= specificSection['section_name'];
+    });
 
-//    Utils.check_connectivity().then((result){
-//      if(result){
-//        networks_helper.sections_incharge_dropdown(token).then((response){
-//          if(response!=null){
-//            print(response);
-//            setState(() {
-//              section_response=json.decode(response);
-//              for(int i=0;i<section_response.length;i++)
-//                incharge.add(section_response[i]['emp_name']);
-//              print(section_response);
-//              //notes_loaded=true;
-//              //update_notes_visibility=true;
-//            });
-//          }
-//        });
-//      }else{
-//        print("Network Not Available");
-//      }
-//    });
+    Utils.check_connectivity().then((result){
+      if(result){
+        networks_helper.sections_incharge_dropdown(token).then((response){
+          if(response!=null){
+            print(response);
+            setState(() {
+              section_response=json.decode(response);
+              for(int i=0;i<section_response.length;i++)
+                section_incharge.add(section_response[i]['emp_name']);
+              print(section_response);
+              //notes_loaded=true;
+              //update_notes_visibility=true;
+            });
+          }
+        });
+        networks_helper.shiftGategories(token).then((response){
+          if(response!=null){
+            print(response);
+            setState(() {
+              section_response=json.decode(response);
+              for(int i=0;i<section_response.length;i++)
+                shift_category.add(section_response[i]['cate_name']);
+              print(section_response);
+              //notes_loaded=true;
+              //update_notes_visibility=true;
+            });
+          }
+        });
+      }else{
+        print("Network Not Available");
+      }
+    });
   }
 
 
@@ -129,6 +147,7 @@ class _EditSections_State extends State<EditSections> {
                       setState(() {
                         selected_incharge = value;
                         section_incharge_id = section_incharge.indexOf(value);
+                        print(section_incharge_id);
                       });
                     },
                     style: Theme.of(context).textTheme.bodyText2,
@@ -199,19 +218,21 @@ class _EditSections_State extends State<EditSections> {
                             color: Colors.amber.shade400,
                             fontSize: 20),
                       ),
-//                    onPressed: () {
-//                      if(_fbKey.currentState.validate())
-//                        networks_helper.addSkillsGroup(token, skill_group_name.text, description.text).then((value){
-//                          var res = jsonDecode(value);
-//                          if(res['error']== false){
-//                            flushBar().flushbar("Add SkillGroup", res['message'], 3, context);
-//                            Navigator.pop(context);
-//                          }
-//                          else {
-//                            flushBar().flushbar("Add SkillGroup error", res['message'], 3, context);
-//                          }
-//                        });
-//                    },
+                    onPressed: () {
+                        print( specificSection['emp_name'][section_incharge_id]['emp_id']);
+                      if(_fbKey.currentState.validate())
+                       sections_network.editSection(token, specificSection['section_id'], name.text,"4", shift_category_id.toString())
+                            .then((value){
+                          var res = jsonDecode(value);
+                          if(res['error']== false){
+                            flushBar().flushbar("Edit Sections", res['message'], 3, context);
+                            Navigator.pop(context);
+                          }
+                          else {
+                            flushBar().flushbar("Edit Sections", res['message'], 3, context);
+                          }
+                        });
+                   },
                     ),
                     height: 50,
                   ),
