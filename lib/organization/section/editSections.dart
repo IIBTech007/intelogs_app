@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intelogsapp/networks/organizationNetworks.dart';
+import 'package:intelogsapp/organization/section/addEmployeeToSection.dart';
 import 'package:intelogsapp/utils/Utils.dart';
 
 
@@ -70,6 +71,13 @@ class _EditSections_State extends State<EditSections> {
 
     // TODO: implement build
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber[600],
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddEmployeeToSection(token)),);
+        },
+        child: Icon(Icons.add),
+      ),
       appBar: AppBar(
         title: Text("Edit Sections",style: TextStyle(color: Colors.white,fontFamily: 'Montserrat'),),
         iconTheme: IconThemeData(color: Colors.white,),
